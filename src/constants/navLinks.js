@@ -3,7 +3,7 @@ import { Bell, FileSearch2, LayoutDashboard, MapPinned, ReceiptText, Truck, Uplo
 export const navLinks = [
 	{
 		label: "Dashboard",
-		href: "/customer/dashboard",
+		href: "/customer/home",
 		icon: LayoutDashboard
 	},
 	{

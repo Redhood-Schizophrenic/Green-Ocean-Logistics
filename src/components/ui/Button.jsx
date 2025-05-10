@@ -1,16 +1,17 @@
-export default function Button({ variant, title, icon, iconPosition = 'left', className = '', onClick }) {
+export default function Button({ variant, title, icon, iconPosition = 'left', className = '', textSize = 'text-base', onClick, displayText = true }) {
 	const variantClass = buttonVariants({ variant });
+	const icon_Position = IconPositionRenderer({ iconPosition })
 	return (
 		<button
 			className={
-				`cursor-pointer flex ${iconPosition === 'left' ? 'flex-row' : 'flex-row-reverse'} items-center justify-center gap-2 px-6 py-2 bg-primary transition-all duration-300 rounded-md font-semibold
+				`cursor-pointer flex ${icon_Position} items-center justify-center gap-2 px-6 py-2 bg-primary transition-colors duration-300 font-semibold
 					${className} ${variantClass}
 				`
 			}
 			onClick={onClick}
 		>
-			{icon}
-			<p>{title}</p>
+			{icon && icon}
+			{displayText && <p className={textSize}>{title}</p>}
 		</button>
 	)
 }
@@ -21,14 +22,47 @@ const buttonVariants = ({ variant }) => {
 			return 'bg-red-700/70 text-[var(--background)] hover:bg-red-700 ';
 		case 'outline':
 			return 'border-2 border-[var(--foreground)]';
+		case 'link':
+			return 'border-b-2 border-[var(--foreground)] rounded-none';
 		case 'secondary':
-			return 'bg-[var(--secondary)] text-[var(--background)] hover:bg-[var(--secondary)]/90';
+			return 'bg-[var(--foreground)]/15 text-[var(--primary)] hover:bg-[var(--foreground)]/5';
 		case 'invert':
 			return 'text-[var(--primary)] bg-[var(--background)] hover:bg-[var(--background)]/90'
 		case 'none':
 			return ''
 
 		default:
-			return 'bg-[var(--primary)] text-[var(--background)] hover:bg-[var(--primary)]/90'
+			return 'border-2 border-[var(--primary)] bg-[var(--primary)] text-[var(--background)] hover:bg-[var(--primary)]/90'
 	}
+}
+
+const IconPositionRenderer = ({ iconPosition }) => {
+	switch (iconPosition) {
+		case 'left':
+			return 'flex-row';
+		case 'right':
+			return 'flex-row-reverse';
+		case 'top':
+			return 'flex-col';
+		case 'bottom':
+			return 'flex-col-reverse'
+	}
+}
+
+export function ButtonCard({ variant, title, icon, iconPosition = 'left', className = '', onClick, displayText = true }) {
+	const variantClass = buttonVariants({ variant });
+	const icon_Position = IconPositionRenderer({ iconPosition })
+	return (
+		<button
+			className={
+				`cursor-pointer flex ${icon_Position} items-center justify-center gap-2 p-3 bg-primary transition-colors duration-300 font-semibold
+					${className} ${variantClass}
+				`
+			}
+			onClick={onClick}
+		>
+			{icon}
+			{displayText && <p>{title}</p>}
+		</button>
+	)
 }

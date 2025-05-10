@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import Button from './Button';
 import { navLinks } from '@/constants/navLinks';
 import { usePathname } from 'next/navigation'
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Sidebar({
@@ -20,7 +19,6 @@ export default function Sidebar({
 	const { open: isOpen, setOpen: setIsOpen, title } = useSidebar();
 	const sidebarWidthPx = 300; // Numeric value for calculations
 	const currentPath = usePathname();
-	const router = useRouter();
 
 	// Check if the screen size is mobile
 	useEffect(() => {

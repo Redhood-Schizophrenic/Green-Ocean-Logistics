@@ -1,21 +1,47 @@
-export const cfsServiceProviders = [
+import { Container, Forklift, Truck } from "lucide-react";
+
+export const servicesList = [
+	{
+		id: 'cfs',
+		label: "CFS",
+		icon: Container
+	},
+	{
+		id: 'transport',
+		label: "Transport",
+		icon: Truck
+	},
+	{
+		id: '3pl',
+		label: "3PL",
+		icon: Forklift
+	},
+	{
+		id: 'warehouse',
+		label: "Warehouse",
+		icon: Container
+	},
+];
+
+export const ServiceProviders = [
 	{
 		id: 'gfs',
+		serviceId: 'cfs',
 		images: [
 			{
-				src: '/global-freight-logistics/1.jpg',
+				src: '/CFS/global-freight-logistics/1.jpg',
 				alt: 'Main',
 			}, {
-				src: '/global-freight-logistics/2.jpg',
+				src: '/CFS/global-freight-logistics/2.jpg',
 				alt: 'Main 2',
 			}, {
-				src: '/global-freight-logistics/3.jpg',
+				src: '/CFS/global-freight-logistics/3.jpg',
 				alt: 'Main 3',
 			}, {
-				src: '/global-freight-logistics/4.jpg',
+				src: '/CFS/global-freight-logistics/4.jpg',
 				alt: 'Main 4',
 			}, {
-				src: '/global-freight-logistics/5.jpg',
+				src: '/CFS/global-freight-logistics/5.jpg',
 				alt: 'Main 5',
 			},
 		],
@@ -27,21 +53,22 @@ export const cfsServiceProviders = [
 	},
 	{
 		id: 'mumbai-central-terminal',
+		serviceId: 'cfs',
 		images: [
 			{
-				src: '/mumbai-central-terminal/1.jpg',
+				src: '/CFS/mumbai-central-terminal/1.jpg',
 				alt: 'Main',
 			}, {
-				src: '/mumbai-central-terminal/2.jpg',
+				src: '/CFS/mumbai-central-terminal/2.jpg',
 				alt: 'Main 2',
 			}, {
-				src: '/mumbai-central-terminal/3.jpg',
+				src: '/CFS/mumbai-central-terminal/3.jpg',
 				alt: 'Main 3',
 			}, {
-				src: '/mumbai-central-terminal/4.jpg',
+				src: '/CFS/mumbai-central-terminal/4.jpg',
 				alt: 'Main 4',
 			}, {
-				src: '/mumbai-central-terminal/5.jpg',
+				src: '/CFS/mumbai-central-terminal/5.jpg',
 				alt: 'Main 5',
 			},
 		],
@@ -53,21 +80,22 @@ export const cfsServiceProviders = [
 	},
 	{
 		id: 'chennai-cfs',
+		serviceId: 'cfs',
 		images: [
 			{
-				src: '/chennai-cfs/1.jpg',
+				src: '/CFS/chennai-cfs/1.jpg',
 				alt: 'Main',
 			}, {
-				src: '/chennai-cfs/2.jpg',
+				src: '/CFS/chennai-cfs/2.jpg',
 				alt: 'Main 2',
 			}, {
-				src: '/chennai-cfs/3.jpg',
+				src: '/CFS/chennai-cfs/3.jpg',
 				alt: 'Main 3',
 			}, {
-				src: '/chennai-cfs/4.jpg',
+				src: '/CFS/chennai-cfs/4.jpg',
 				alt: 'Main 4',
 			}, {
-				src: '/chennai-cfs/5.jpg',
+				src: '/CFS/chennai-cfs/5.jpg',
 				alt: 'Main 5',
 			},
 		],
@@ -77,4 +105,4 @@ export const cfsServiceProviders = [
 		tags: ['Packing', 'Storage', 'Customs'],
 		description: "Well-connected CFS with extensive storage space and specialized handling equipment.",
 	}
-]
+];
