@@ -74,7 +74,7 @@ export const Dialog = ({
 				<div className="fixed inset-0 z-50 flex items-center justify-center">
 					{/* Overlay */}
 					<div
-						className="fixed inset-0 bg-black/50 transition-opacity duration-200"
+						className="fixed inset-0 bg-black/50 backdrop-blur-lg transition-opacity duration-200"
 						style={{ opacity: openState ? 1 : 0 }}
 					/>
 					{/* Dialog Content */}
@@ -84,7 +84,7 @@ export const Dialog = ({
 						aria-modal="true"
 						aria-labelledby={title ? 'dialog-title' : undefined}
 						aria-describedby={description ? 'dialog-description' : undefined}
-						className="relative bg-white rounded-lg shadow-xl max-w-lg w-full mx-4 transform transition-all duration-200 ease-out"
+						className="relative bg-[var(--background)] rounded-lg shadow-xl w-auto mx-4 transform transition-all duration-200 ease-out"
 						style={{
 							opacity: openState ? 1 : 0,
 							transform: openState ? 'scale(1)' : 'scale(0.95)',
@@ -99,14 +99,16 @@ export const Dialog = ({
 									</h2>
 								)}
 								{description && (
-									<p id="dialog-description" className="mt-1 text-sm text-gray-500">
+									<p id="dialog-description" className="mt-1 text-sm">
 										{description}
 									</p>
 								)}
 							</div>
 						)}
+
 						{/* Content */}
 						<div className="p-6">{children}</div>
+
 						{/* Close Button */}
 						<button
 							onClick={() => handleOpenChange(false)}

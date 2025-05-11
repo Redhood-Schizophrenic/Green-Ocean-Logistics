@@ -7,12 +7,15 @@ import { ServiceProviders, servicesList } from "@/constants/services";
 import Button from "@/components/ui/Button";
 import { SlidersHorizontalIcon, Star, MapPin, ChevronLeft, ChevronRight, } from 'lucide-react';
 import Image from "next/image";
+import { Dialog } from "@/components/ui/Dialog";
+import { FilterCFS } from "./components/Filter";
 
 export default function ClientHomePage() {
 	const [isMobile, setIsMobile] = useState(false);
 	const [currentService, setCurrentService] = useState('cfs');
 	const [serviceTitle, setServiceTitle] = useState('CFS')
 	const [filteredServices, setFilteredServices] = useState(ServiceProviders.filter((provider) => provider.serviceId === currentService));
+	const [isOpen, setIsOpen] = useState(false);
 
 	useEffect(() => {
 		const checkIfMobile = () => {
@@ -41,7 +44,16 @@ export default function ClientHomePage() {
 			<section className="p-4">
 				<div className="flex items-center justify-between">
 					<h1 className="font-bold text-2xl">{serviceTitle} Service Providers</h1>
-					<Button title={'Filters'} icon={<SlidersHorizontalIcon />} variant={'outline'} iconPosition="right" className="rounded-xl" />
+					<Dialog
+						trigger={<Button title={'Filters'} icon={<SlidersHorizontalIcon />} variant={'outline'} iconPosition="right" className="rounded-xl" />}
+						title="Filters"
+						open={isOpen}
+						onOpenChange={setIsOpen}
+					>
+						<FilterCFS openDialog={setIsOpen} />
+					</Dialog>
+
+
 				</div>
 
 				<div className="flex flex-col md:gap-10 gap-4 pt-20">

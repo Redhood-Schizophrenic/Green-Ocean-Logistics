@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function HeaderLayout({ currentService, setCurrentService }) {
 	const [displayAfterHeader, setDisplayAfterHeader] = useState(false);
-	const [isLogin, setIsLogin] = useState(false);
+	const [isLogin, setIsLogin] = useState(true);
 	const [displayLogin, setDisplayLogin] = useState(false);
 	const router = useRouter();
 
