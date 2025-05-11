@@ -120,10 +120,10 @@ export function FilterCFS({ openDialog }) {
 	};
 
 	return (
-		<div className="p-6">
+		<div className="md:p-6">
 			{/* Type of Place */}
 			<div className="mb-6">
-				<div className="flex gap-4">
+				<div className="grid md:grid-cols-4 grid-cols-1 gap-4">
 					{['Tariff Rates', 'Free Days', 'Monthly Dues', 'Containers'].map((type) => (
 						<button
 							key={type}
