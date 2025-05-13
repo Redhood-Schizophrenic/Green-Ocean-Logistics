@@ -1,7 +1,6 @@
 import { tariffs } from "@/constants/orders";
 import { DataTable } from "@/components/ui/Table";
 import { Download } from "lucide-react";
-import Link from "next/link";
 
 const columns = [
 	{
@@ -22,7 +21,7 @@ const columns = [
 		id: 'file',
 		accessorKey: 'filePath',
 		header: 'File',
-		filterable: true,
+		filterable: false,
 		cell: ({ row }) => <div>{row.original.filePath}</div>,
 	},
 	{
@@ -37,7 +36,21 @@ const columns = [
 		accessorKey: 'actions',
 		header: 'Actions',
 		filterable: false,
-		cell: ({ row }) => <Download onClick={() => <Link href={'/logo.png'} download><Download /></Link>} />,
+		cell: ({ row }) => (
+			<Download
+				className="cursor-pointer text-[var(--primary)]"
+				onClick={() => {
+					const link = document.createElement('a');
+					const url = row.original.filePath
+					link.setAttribute('href', url)
+					link.setAttribute('download', url)
+					link.style.visibility = 'hidden'
+					document.body.appendChild(link)
+					link.click()
+					document.body.removeChild(link)
+				}}
+			/>
+		),
 	}
 ]
 

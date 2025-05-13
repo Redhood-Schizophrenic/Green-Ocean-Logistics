@@ -32,7 +32,7 @@ export function DataTable({
 				typeof column.accessorKey === "string"
 			)
 			.map(column => ({
-				id: column.accessorKey,
+				id: column.id || column.accessorKey,
 				label: column.header?.toString() || column.accessorKey
 			}));
 	}, [columns]);

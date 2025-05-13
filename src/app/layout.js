@@ -1,5 +1,6 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import ChatBot from "@/components/utils/Chatbot";
 const font = Outfit({ subsets: ["latin"], });
 
 export const metadata = {
@@ -14,6 +15,7 @@ export default function MainRootLayout({ children }) {
         className={`${font.className} antialiased`}
       >
         {children}
+        <ChatBot />
       </body>
     </html>
   );

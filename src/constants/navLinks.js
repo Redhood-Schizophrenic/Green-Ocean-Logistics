@@ -17,10 +17,10 @@ export const navLinks = [
 		icon: Truck,
 		subItems: [
 			{ label: "Services", href: "/customer/cfs/services", icon: FileSearch2 },
-			{ label: "Track & Trace", href: "", icon: MapPinned },
+			{ label: "Track & Trace", href: "/customer/cfs/track-trace", icon: MapPinned },
 			{ label: "Tariff Upload", href: "/customer/cfs/tariff-upload", icon: UploadIcon },
 		]
 	},
 	{ label: "Notifications & Updates", href: "", icon: Bell },
-	{ label: "Profile & Support", href: "", icon: User },
+	{ label: "Profile & Support", href: "/customer/profile", icon: User },
 ]
