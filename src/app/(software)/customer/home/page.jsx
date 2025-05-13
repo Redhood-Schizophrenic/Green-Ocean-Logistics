@@ -9,23 +9,13 @@ import { SlidersHorizontalIcon, Star, MapPin, ChevronLeft, ChevronRight, } from 
 import Image from "next/image";
 import { Dialog } from "@/components/ui/Dialog";
 import { FilterCFS } from "./components/Filter";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function ClientHomePage() {
-	const [isMobile, setIsMobile] = useState(false);
 	const [currentService, setCurrentService] = useState('cfs');
 	const [serviceTitle, setServiceTitle] = useState('CFS')
 	const [filteredServices, setFilteredServices] = useState(ServiceProviders.filter((provider) => provider.serviceId === currentService));
 	const [isOpen, setIsOpen] = useState(false);
-
-	useEffect(() => {
-		const checkIfMobile = () => {
-			const mobile = window.innerWidth < 768;
-			setIsMobile(mobile);
-		};
-
-		// Check on first render
-		checkIfMobile();
-	}, []);
 
 	useEffect(() => {
 		setServiceTitle(servicesList.find((service) => service.id === currentService).label);
@@ -34,9 +24,9 @@ export default function ClientHomePage() {
 
 
 	return (
-		<main className={`w-full h-[200dvh] items-center justify-center`}>
+		<section className={`w-full h-[200dvh] items-center justify-center`}>
 			{
-				isMobile ?
+				useIsMobile() ?
 					<MobileHeaderLayout currentService={currentService} setCurrentService={setCurrentService} />
 					:
 					<HeaderLayout currentService={currentService} setCurrentService={setCurrentService} />
@@ -71,7 +61,7 @@ export default function ClientHomePage() {
 					))}
 				</div>
 			</section>
-		</main >
+		</section >
 	)
 }
 

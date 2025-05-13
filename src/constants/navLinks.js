@@ -16,9 +16,9 @@ export const navLinks = [
 		href: '',
 		icon: Truck,
 		subItems: [
-			{ label: "Services", href: "", icon: FileSearch2 },
+			{ label: "Services", href: "/customer/cfs/services", icon: FileSearch2 },
 			{ label: "Track & Trace", href: "", icon: MapPinned },
-			{ label: "Tariff Upload", href: "", icon: UploadIcon },
+			{ label: "Tariff Upload", href: "/customer/cfs/tariff-upload", icon: UploadIcon },
 		]
 	},
 	{ label: "Notifications & Updates", href: "", icon: Bell },

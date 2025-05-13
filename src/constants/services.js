@@ -1,4 +1,4 @@
-import { Container, Forklift, Truck } from "lucide-react";
+import { ArrowDown, Boxes, Container, CreditCard, FastForward, FileText, Forklift, LayoutGrid, Receipt, Scale, Scan, Truck } from "lucide-react";
 
 export const servicesList = [
 	{
@@ -20,6 +20,69 @@ export const servicesList = [
 		id: 'warehouse',
 		label: "Warehouse",
 		icon: Container
+	},
+];
+
+export const cfsServices = [
+	{
+		title: 'EIR / COP Request',
+		description: 'Request Equipment Interchange Receipt or Container Operational Permit',
+		href: '/customer/cfs/services/eir-cop',
+		icon: FileText,
+	},
+	{
+		title: 'Priority Movements Request',
+		description: 'Request priority handling for urgent container movements',
+		href: '/customer/cfs/services/priority',
+		icon: FastForward,
+	},
+	{
+		title: 'Weighment Slip Request',
+		description: 'Generate container weight measurement slips',
+		href: '/customer/cfs/services/weighment-slip',
+		icon: Scale,
+	},
+	{
+		title: 'Special Equipment Request',
+		description: 'Request specialized container handling equipment',
+		href: '/customer/cfs/services/special-equipment',
+		icon: LayoutGrid,
+	},
+	{
+		title: 'Container Grounding',
+		description: 'Request container grounding services',
+		href: '/customer/cfs/services/container-grounding',
+		icon: ArrowDown,
+	},
+	{
+		title: 'Container Staging Request',
+		description: 'Schedule container staging operations',
+		href: '/customer/cfs/services/container-staging',
+		icon: Boxes,
+	},
+	{
+		title: 'Re-Scanning Request',
+		description: 'Request container re-scanning services',
+		href: '/customer/cfs/services/rescan',
+		icon: Scan,
+	},
+	{
+		title: 'Cheque Acceptance',
+		description: 'Submit cheque payments requests',
+		href: '/customer/cfs/services/cheque',
+		icon: CreditCard,
+	},
+	{
+		title: 'Tax Invoice Request',
+		description: 'Generate tax invoice for services',
+		href: '/customer/cfs/services/tax-invoice',
+		icon: Receipt,
+	},
+	{
+		title: 'Job Order Update Request',
+		description: 'Modify existing job orders',
+		href: '/customer/cfs/services/job-order',
+		icon: FileText,
 	},
 ];
 

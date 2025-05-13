@@ -112,7 +112,7 @@ export const Dialog = ({
 						{/* Close Button */}
 						<button
 							onClick={() => handleOpenChange(false)}
-							className="absolute top-4 right-4 rounded-full p-1 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+							className="absolute top-4 right-4 rounded-full p-1 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer"
 							aria-label="Close dialog"
 						>
 							<X className="h-5 w-5 text-gray-500" />

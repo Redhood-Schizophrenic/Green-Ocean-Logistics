@@ -180,7 +180,7 @@ export default function Sidebar({
 					</nav>
 				</div>
 				<div className='absolute bottom-4 left-2 w-full flex items-center justify-center'>
-					<Button title={'Logout'} variant={'invert'} className='w-[200px]' icon={<LogOutIcon className='w-4 h-4 ml-2' />} iconPosition='right' />
+					<Button title={'Logout'} variant={'invert'} className='w-[200px] rounded-xl' icon={<LogOutIcon className='w-4 h-4 ml-2' />} iconPosition='right' />
 				</div>
 			</div>
 

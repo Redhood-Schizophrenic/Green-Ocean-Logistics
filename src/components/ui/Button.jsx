@@ -1,14 +1,15 @@
-export default function Button({ variant, title, icon, iconPosition = 'left', className = '', textSize = 'text-base', onClick, displayText = true }) {
+export default function Button({ variant, title, icon, iconPosition = 'left', className = '', textSize = 'text-base', onClick, displayText = true, disabled }) {
 	const variantClass = buttonVariants({ variant });
 	const icon_Position = IconPositionRenderer({ iconPosition })
 	return (
 		<button
 			className={
-				`cursor-pointer flex ${icon_Position} items-center justify-center gap-2 px-6 py-2 bg-primary transition-colors duration-300 font-semibold
-					${className} ${variantClass}
+				`flex ${icon_Position} items-center justify-center gap-2 px-3 py-2 bg-primary transition-colors duration-300 font-semibold
+					${className} ${variantClass} ${disabled ? 'text-gray-500 border-gray-500 bg-opacity/50 cursor-not-allowed' : 'cursor-pointer'}
 				`
 			}
 			onClick={onClick}
+			disabled={disabled}
 		>
 			{icon && icon}
 			{displayText && <p className={textSize}>{title}</p>}

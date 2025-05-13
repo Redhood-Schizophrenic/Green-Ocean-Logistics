@@ -4,7 +4,7 @@ import { Check, ChevronDown, ChevronUp } from "lucide-react"
 // Helper function for combining class names (simplified version of cn utility)
 const cn = (...classes) => classes.filter(Boolean).join(" ")
 
-export const Select = ({ children, value, onValueChange, disabled }) => {
+export const Select = ({ children, value, onValueChange, disabled, placeholder = 'Select an option' }, className = '') => {
 	const [open, setOpen] = React.useState(false)
 	const [selectedValue, setSelectedValue] = React.useState(value || "")
 
@@ -49,13 +49,13 @@ export const Select = ({ children, value, onValueChange, disabled }) => {
 		<div className="relative" ref={selectRef}>
 			<button
 				type="button"
-				className={`flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background focus:outline-none focus:ring-1 focus:ring-ring
-					${disabled && "cursor-not-allowed opacity-50"}`}
+				className={`flex h-9 min-w-[200px] w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background focus:outline-none focus:ring-1 focus:ring-ring
+					${disabled && "cursor-not-allowed opacity-50"} ${className}`}
 				onClick={() => !disabled && setOpen(!open)}
 				disabled={disabled}
 			>
-				<span className="line-clamp-1">
-					{selectedItem ? selectedItem.children : "Select an option"}
+				<span className="">
+					{selectedItem ? selectedItem.children : placeholder}
 				</span>
 				{open ? <ChevronUp className="h-4 w-4 opacity-50" /> : <ChevronDown className="h-4 w-4 opacity-50" />}
 

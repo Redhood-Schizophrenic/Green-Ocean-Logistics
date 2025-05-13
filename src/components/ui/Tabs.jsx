@@ -55,7 +55,7 @@ const TabsList = ({ className, activeTab, onValueChange, children, ...props }) =
 	return (
 		<div
 			className={cn(
-				"inline-flex h-9 items-center justify-center rounded-lg bg-gray-100 p-1 text-gray-500",
+				"inline-flex min-h-12 items-center justify-center rounded-xl bg-[var(--accent)] p-1 px-6 text-gray-500",
 				className
 			)}
 			{...domProps}
@@ -79,8 +79,8 @@ const TabsTrigger = ({ value, activeTab, onValueChange, className, children, ...
 			aria-selected={isActive}
 			onClick={() => onValueChange && onValueChange(value)}
 			className={cn(
-				"inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-				isActive ? "bg-white text-gray-900 shadow" : "",
+				"inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+				isActive ? "bg-[var(--primary)] text-[var(--background)] shadow" : "",
 				className
 			)}
 			{...domProps}
