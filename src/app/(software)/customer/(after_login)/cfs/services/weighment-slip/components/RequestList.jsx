@@ -1,7 +1,7 @@
 import { DataTable } from '@/components/ui/Table';
-import { weightmentRequests } from '@/constants/orders';
+import { weightmentRequests } from '@/constants/requests';
 import { Download } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 const RequestList = () => {
   const columns = [

@@ -1,20 +1,17 @@
 import { useState } from 'react';
-import { Search, Upload, Eye, Download, CheckCircle, Clock, XCircle, Filter } from 'lucide-react';
-import { weightmentRequests } from '@/constants/orders';
+import { Search, Eye, Download, } from 'lucide-react';
 import Input from '@/components/ui/Input';
+import { weightmentRequests } from '@/constants/requests';
 
 export default function MobileRequestList() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [showFilter, setShowFilter] = useState(false);
-  const [statusFilter, setStatusFilter] = useState('');
-  const [cfsFilter, setCfsFilter] = useState('');
 
   const getStatusBadge = (status) => {
     switch (status) {
       case 'Accepted':
         return (
           <div className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full flex items-center">
-            <span>Ready</span>
+            <span>Accepted</span>
           </div>
         );
       case 'Pending':
@@ -34,27 +31,12 @@ export default function MobileRequestList() {
     }
   };
 
-  const toggleFilter = () => {
-    setShowFilter(!showFilter);
-  };
-
-  const applyFilters = () => {
-    setShowFilter(false);
-  };
-
-  const clearFilters = () => {
-    setStatusFilter('');
-    setCfsFilter('');
-    setShowFilter(false);
-  };
-
   const filteredRequests = weightmentRequests.filter(request => {
     const matchesSearch = searchQuery === '' ||
       request.order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      request.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
       request.containerNo.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = statusFilter === '' || request.status === statusFilter;
-    const matchesCfs = cfsFilter === '' || request.cfs === cfsFilter;
-    return matchesSearch && matchesStatus && matchesCfs;
+    return matchesSearch;
   });
 
   return (
@@ -79,11 +61,12 @@ export default function MobileRequestList() {
         {filteredRequests.map((request, index) => (
           <div key={index} className="bg-[var(--accent)] rounded-lg p-3 mb-3 shadow-sm">
             <div className="flex justify-between items-center mb-1">
-              <span className="font-medium">#{request.order.id}</span>
+              <span className="font-medium">#{request.id}</span>
               {getStatusBadge(request.status)}
             </div>
-            <p className="text-sm text-gray-600 mb-1">{request.containerNo}</p>
-            <p className="text-sm text-gray-600 mb-1">{request.order.cfs.title}</p>
+            <p className="text-sm text-gray-600 mb-1">Order:- {request.order.id}</p>
+            <p className="text-sm text-gray-600 mb-1">Container No:- {request.containerNo}</p>
+            <p className="text-sm text-gray-600 mb-1">CFS:- {request.order.cfs.title}</p>
 
             <div className="flex justify-between items-center">
               <p className="text-sm text-gray-600 mb-1">{request.date}</p>

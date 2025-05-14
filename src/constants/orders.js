@@ -209,33 +209,3 @@ export const tariffs = [
 		},
 	},
 ];
-
-export const weightmentRequests = [
-	{
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'MSCU1234567',
-		date: '10 January 2024',
-		status: 'Accepted',
-		filePath: '/weighment.pdf',
-	},
-	{
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'TGHU1234567',
-		date: '10 January 2024',
-		status: 'Rejected',
-	},
-]

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { Calendar } from 'lucide-react';
+import { orders } from '@/constants/orders';
+import { Select, SelectItem } from '@/components/ui/Select';
+import Label from '@/components/ui/Label';
+import Input from '@/components/ui/Input';
+import Button from '@/components/ui/Button';
 
 const NewSpecialEquipment = () => {
   const [formData, setFormData] = useState({
-    cfsName: '',
+    orderId: '',
     containerNumber: '',
     equipmentType: '',
     equipmentCapacity: '',
-    requiredDate: '',
+    requiredDate: new Date().toISOString().split('T')[0],
     timeSlot: '',
     remarks: '',
     file: null
@@ -30,169 +35,124 @@ const NewSpecialEquipment = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     console.log('Form submitted:', formData);
-    
+
   };
 
   return (
-    <div className="bg-white rounded-lg p-6 mb-6 shadow-sm">
+    <div className="border rounded-lg p-6 mb-4 shadow-sm">
       <h2 className="text-lg font-medium mb-4">New Special Equipments</h2>
-      
+
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-2 gap-4 mb-4">
-        
-          <div>
-            <label className="block text-sm font-medium mb-1">CFS Name</label>
-            <div className="relative">
-              <select 
-                name="cfsName"
-                value={formData.cfsName}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded bg-white text-gray-500"
-              >
-                <option value="">Select CFS</option>
-                <option value="cfs1">CFS 1</option>
-                <option value="cfs2">CFS 2</option>
-                <option value="cfs3">CFS 3</option>
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                <svg className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className='flex flex-col gap-2'>
+            <Label title={'Order'} />
+            <Select value={formData.orderId} onValueChange={handleInputChange} placeholder='Select an Order'>
+              {
+                orders.map((order, index) => (
+                  <SelectItem key={index} value={order.id}>{order.id} - {order.cfs.title}</SelectItem>
+                ))
+              }
+            </Select>
           </div>
 
-          
-          <div>
-            <label className="block text-sm font-medium mb-1">Container Number</label>
-            <input
+          <div className='flex flex-col gap-2'>
+            <Label title={'Container Number'} />
+            <Input
               type="text"
               name="containerNumber"
               value={formData.containerNumber}
               onChange={handleInputChange}
               placeholder="Enter container number"
-              className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
 
-        
-          <div>
-            <label className="block text-sm font-medium mb-1">Equipment Type</label>
-            <div className="relative">
-              <select
-                name="equipmentType"
-                value={formData.equipmentType}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded bg-white text-gray-500"
-              >
-                <option value="">Select equipment type</option>
-                <option value="forklift">Forklift</option>
-                <option value="crane">Crane</option>
-                <option value="lowbed">Lowbed</option>
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                <svg className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
+          <div className='flex flex-col gap-2'>
+            <Label title={'Equipment Type'} />
+            <Select value={formData.equipmentType} onValueChange={handleInputChange} placeholder='Select Equipment'>
+              <SelectItem value={'forklift'}>Forklift</SelectItem>
+              <SelectItem value={'crane'}>Crane</SelectItem>
+              <SelectItem value={'lowbed'}>Lowbed</SelectItem>
+            </Select>
           </div>
 
-        
-          <div>
-            <label className="block text-sm font-medium mb-1">Equipment Capacity</label>
-            <input
+
+          <div className='flex flex-col gap-2'>
+            <Label title={'Equipment Type'} />
+            <Input
               type="text"
               name="equipmentCapacity"
               value={formData.equipmentCapacity}
               onChange={handleInputChange}
               placeholder="Enter capacity in tons"
-              className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
 
-          
-          <div>
-            <label className="block text-sm font-medium mb-1">Required Date</label>
-            <div className="relative">
-              <input
-                type="date"
-                name="requiredDate"
-                value={formData.requiredDate}
-                onChange={handleInputChange}
-                placeholder="Select date"
-                className="w-full p-2 border border-gray-300 rounded pr-10"
-              />
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <Calendar className="h-4 w-4 text-gray-400" />
-              </div>
-            </div>
+
+          <div className='flex flex-col gap-2'>
+            <Label title={'Required Date'} />
+            <Input
+              type="date"
+              name="requiredDate"
+              value={formData.requiredDate}
+              onChange={handleInputChange}
+              placeholder="Select date"
+            />
           </div>
 
-          
-          <div>
-            <label className="block text-sm font-medium mb-1">Time Slot</label>
-            <div className="relative">
-              <select
-                name="timeSlot"
-                value={formData.timeSlot}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded bg-white text-gray-500"
-              >
-                <option value="">Select time slot</option>
-                <option value="morning">08:00 - 12:00</option>
-                <option value="afternoon">13:00 - 17:00</option>
-                <option value="evening">18:00 - 22:00</option>
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                <svg className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+
+          <div className='flex flex-col gap-2'>
+            <Label title={'Time Slot'} />
+            <Select
+              placeholder='Select a TimeSlot'
+              value={formData.timeSlot}
+              onChange={handleInputChange}
+            >
+              <SelectItem value={'morning'}>08:00 - 12:00</SelectItem>
+              <SelectItem value={'afternoon'}>13:00 - 17:00</SelectItem>
+              <SelectItem value={'evening'}>18:00 - 22:00</SelectItem>
+            </Select>
+          </div>
+
+          <div className='flex flex-col gap-2'>
+            <Label title={'Remarks (Optional)'} />
+            <Input
+              type="text"
+              value={formData.remarks}
+              onChange={handleInputChange}
+              placeholder="Add any additional remarks or requirements..."
+            />
+          </div>
+
+
+          <div className='flex flex-col gap-2'>
+            <Label title={'Upload Documents'} />
+            <div className="flex items-center gap-2">
+              <label className="flex items-center cursor-pointer border rounded-xl px-4 py-2">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
                 </svg>
-              </div>
+                <span className='text-sm'>Choose File</span>
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </label>
+              <span className="text-sm text-gray-500 break-all max-w-full">
+                {formData.file ? formData.file.name : "No file chosen"}
+              </span>
             </div>
           </div>
         </div>
 
-        
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-1">Remarks (Optional)</label>
-          <textarea
-            name="remarks"
-            value={formData.remarks}
-            onChange={handleInputChange}
-            placeholder="Add any additional remarks or requirements..."
-            className="w-full p-2 border border-gray-300 rounded h-24"
+
+        <div className="flex justify-start mt-4">
+          <Button
+            title={'Submit Request'}
+            className='rounded-lg'
           />
-        </div>
-
-        
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-1">Upload Documents</label>
-          <div className="flex flex-wrap items-center">
-            <label className="mr-3 mb-2 cursor-pointer bg-white border border-gray-300 rounded px-3 py-1 text-sm text-gray-700">
-              Choose File
-              <input
-                type="file"
-                className="hidden"
-                onChange={handleFileChange}
-              />
-            </label>
-            <span className="text-sm text-gray-500 break-all max-w-full">
-              {formData.file ? formData.file.name : "No file chosen"}
-            </span>
-          </div>
-        </div>
-
-        
-        <div className="flex justify-start">
-          <button
-            type="submit"
-            className="bg-[var(--primary)] hover:bg-green-800 text-white py-2 px-4 rounded text-sm"
-          >
-            Submit Request
-          </button>
         </div>
       </form>
     </div>
