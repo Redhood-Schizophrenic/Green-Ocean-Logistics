@@ -7,12 +7,8 @@ import MobileSpecialEquipment from "./components/MobileSpecialEquipment";
 import NewSpecialEquipment from "./components/NewSpecialEquipment";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-
-
 export default function SpecialEquipmentRequestPage() {
-
 	const { setTitle } = useSidebar();
-
 	useEffect(() => {
 		setTitle('Special Equipment Request')
 	}, []);

@@ -7,10 +7,10 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import MobileRequestList from "./components/MobileTable";
 import RequestList from "./components/Table";
 
-export default function ChequePaymentRequest() {
+export default function RescanRequestPage() {
 	const { setTitle } = useSidebar();
 	useEffect(() => {
-		setTitle('Cheque Acceptance Request')
+		setTitle('My Orders')
 	}, []);
 
 	return (
@@ -26,4 +26,3 @@ export default function ChequePaymentRequest() {
 		</section>
 	)
 }
-

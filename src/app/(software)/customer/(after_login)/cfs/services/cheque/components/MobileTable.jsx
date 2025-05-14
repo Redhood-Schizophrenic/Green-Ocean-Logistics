@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { Search, Download, Eye } from 'lucide-react';
-import { specialEquipmentsRequest } from '@/constants/requests';
+import { chequeRequests } from '@/constants/requests';
 import Input from '@/components/ui/Input';
+import Image from 'next/image';
+import { Dialog } from '@/components/ui/Dialog';
 
-const MobileSpecialEquipment = () => {
-
+export default function MobileRequestList() {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredRequests = specialEquipmentsRequest.filter(request => {
+  const filteredRequests = chequeRequests.filter(request => {
     const matchesSearch =
       request.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
       request.containerNo.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      request.equipment.toLowerCase().includes(searchQuery.toLowerCase());
+      request.order.id.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesSearch;
   });
 
@@ -45,6 +46,7 @@ const MobileSpecialEquipment = () => {
             <Search size={16} className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
           </div>
         </div>
+
         <div className="px-4 pb-4">
           {filteredRequests.map((request, index) => (
             <div key={index} className="bg-[var(--accent)] rounded-lg p-3 mb-3 shadow-sm">
@@ -57,16 +59,31 @@ const MobileSpecialEquipment = () => {
               <div className="text-sm text-gray-600 mb-1">Order Id: {request.order.id}</div>
               <div className="text-sm text-gray-600 mb-1">Container: {request.containerNo}</div>
               <div className="text-sm text-gray-600 mb-1">CFS: {request.order.cfs.title}</div>
-              <div className="text-sm text-gray-600 mb-1">Equipment Type: {request.equipment}</div>
+              <div className="text-sm text-gray-600 mb-1">Amount: Rs. {request.amount}</div>
+              <div className="text-sm text-gray-600 mb-1">Reason: {request.reason}</div>
               <div className="flex justify-between items-center">
                 <p className="text-sm text-gray-600 mb-1">{request.date}</p>
-                <div className="flex space-x-2">
-                  <button className="p-1">
-                    <Eye size={18} />
-                  </button>
-                  <button className="p-1">
-                    <Download size={18} />
-                  </button>
+                <div className='flex gap-2 items-center'>
+                  <Dialog
+                    trigger={<Eye size={18} className="cursor-pointer text-[var(--primary)]" />}
+                    title={request?.id || 'Request'}
+                  >
+                    <Image src={request.filePath} width={500} height={500} alt={request?.id || 'Request'} className='min-w-[200px]' />
+                  </Dialog>
+                  <Download
+                    className="cursor-pointer text-[var(--primary)]"
+                    size={18}
+                    onClick={() => {
+                      const link = document.createElement('a');
+                      const url = request.filePath
+                      link.setAttribute('href', url)
+                      link.setAttribute('download', url)
+                      link.style.visibility = 'hidden'
+                      document.body.appendChild(link)
+                      link.click()
+                      document.body.removeChild(link)
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -75,6 +92,5 @@ const MobileSpecialEquipment = () => {
       </div>
     </div>
   );
-};
+}
 
-export default MobileSpecialEquipment;

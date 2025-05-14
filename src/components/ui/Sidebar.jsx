@@ -1,6 +1,6 @@
 import { useSidebar } from '@/contexts/SidebarProvider';
 import { CompanyName } from '@/constants/CompanyName';
-import { Bell, LogOutIcon, PanelLeft, User, ChevronDown, ChevronRight } from 'lucide-react';
+import { Bell, LogOutIcon, PanelLeft, User, ChevronDown, ChevronRight, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Button from './Button';
 import { navLinks } from '@/constants/navLinks';
@@ -10,37 +10,55 @@ import Link from 'next/link';
 export default function Sidebar({
 	children,
 	defaultOpen = true,
-	sidebarWidth = "w-[300px]",
+	sidebarClassWidth = "w-[300px]", // Use tailwind class instead of fixed px
 	sidebarColor = "bg-[var(--primary)]",
 	sidebarItems = navLinks
 }) {
 	const [isMobile, setIsMobile] = useState(false);
+	const [isTablet, setIsTablet] = useState(false);
 	const [expandedItems, setExpandedItems] = useState({});
 	const { open: isOpen, setOpen: setIsOpen, title } = useSidebar();
-	const sidebarWidthPx = 300; // Numeric value for calculations
 	const currentPath = usePathname();
 
-	// Check if the screen size is mobile
+	// Check screen size and adjust layout accordingly
 	useEffect(() => {
-		const checkIfMobile = () => {
-			const mobile = window.innerWidth < 768;
+		const checkScreenSize = () => {
+			const mobile = window.innerWidth < 640; // sm breakpoint
+			const tablet = window.innerWidth >= 640 && window.innerWidth < 1024; // md to lg
+
 			setIsMobile(mobile);
-			// If transitioning to mobile, close the sidebar by default
+			setIsTablet(tablet);
+
+			// Set default sidebar state based on screen size
 			if (mobile) {
 				setIsOpen(false);
+			} else if (tablet) {
+				setIsOpen(false); // Collapsed by default on tablet
 			} else {
 				setIsOpen(defaultOpen);
 			}
 		};
 
 		// Check on first render
-		checkIfMobile();
+		checkScreenSize();
+
+		// Check for Ctrl+B
+		const handleKeyDown = (e) => {
+			if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+				e.preventDefault(); // Prevent browser default (like bold in inputs)
+				toggleSidebar();
+			}
+		};
+		window.addEventListener('keydown', handleKeyDown);
 
 		// Add event listener for window resize
-		window.addEventListener('resize', checkIfMobile);
+		window.addEventListener('resize', checkScreenSize);
 
 		// Clean up
-		return () => window.removeEventListener('resize', checkIfMobile);
+		return () => {
+			window.removeEventListener('resize', checkScreenSize)
+			window.removeEventListener('keydown', handleKeyDown);
+		};
 	}, [defaultOpen, setIsOpen]);
 
 	// Toggle sidebar
@@ -61,93 +79,95 @@ export default function Sidebar({
 		}));
 	};
 
+	// Determine sidebar width class based on screen size
+	const getSidebarWidthClass = () => {
+		if (isMobile) return "w-3/4 max-w-xs"; // 75% width on mobile, max 320px
+		if (isTablet) return "w-72"; // Fixed width on tablet
+		return sidebarClassWidth; // Default width on desktop
+	};
+
 	return (
-		<div className="flex h-screen overflow-hidden">
-			{/* Overlay for mobile when sidebar is open */}
-			{isMobile && isOpen && (
+		<div className="fixed inset-0  flex min-h-screen overflow-hidden">
+			{/* Overlay for when sidebar is open on mobile/tablet */}
+			{(isMobile || isTablet) && isOpen && (
 				<div
-					className="fixed inset-0 bg-black bg-opacity-50 z-20"
+					className="fixed inset-0 bg-black bg-opacity-50 z-20 transition-opacity duration-300"
 					onClick={toggleSidebar}
+					aria-hidden="true"
 				/>
 			)}
 
 			{/* Sidebar */}
-			<div
+			<aside
 				className={`
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-          fixed inset-y-0 left-0 z-30 ${sidebarWidth}
-          ${sidebarColor} text-white transition-transform duration-300 ease-in-out h-full
+          fixed md:sticky top-0 h-screen z-30
+          ${getSidebarWidthClass()}
+          ${isOpen ? 'translate-x-0' : (isMobile || isTablet ? '-translate-x-full md:w-0' : '-translate-x-[400px] md:w-0')}
+          ${sidebarColor} text-white 
+          transition-all duration-300 ease-in-out
+          flex flex-col
         `}
 			>
 				{/* Sidebar Header */}
-				<div className="p-6 mb-8 flex justify-between items-center">
-					<h2 className="text-xl font-semibold">{CompanyName}</h2>
-					{isMobile && (
+				<div className="p-4 md:p-6 flex justify-between items-center">
+					<h2 className="text-xl font-semibold truncate">{CompanyName}</h2>
+					{(isMobile || isTablet) && (
 						<button
 							onClick={toggleSidebar}
-							className="text-white p-2 rounded hover:bg-opacity-20"
+							className="p-2 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors"
 							aria-label="Close sidebar"
 						>
-							<PanelLeft className='text-[var(--primary)]' />
+							<X className="w-5 h-5" />
 						</button>
 					)}
 				</div>
 
-				{/* Sidebar Content */}
-				<div className="p-4 h-full">
+				{/* Sidebar Content - Scrollable */}
+				<div className="p-4 flex-grow overflow-y-auto scrollbar-thin">
 					<nav>
-						<ul>
+						<ul className="space-y-2">
 							{sidebarItems.map((item, index) => {
 								const active = isActive(item.href);
 								const hasSubItems = item.subItems && item.subItems.length > 0;
 								const isExpanded = expandedItems[index];
 
 								return (
-									<li key={index} className="mb-2">{
-										hasSubItems ?
-											(
-												<div
-													className={`flex items-center justify-between cursor-pointer p-2 rounded transition-colors duration-200 ${active
-														? 'bg-white text-[var(--foreground)] font-medium'
-														: 'hover:bg-white hover:text-[var(--foreground)] hover:bg-opacity-20'
-														}`}
-													onClick={() => {
-														toggleItemExpand(index);
-													}}
-												>
-													<div className="flex items-center gap-3">
-														{item?.icon && (
-															<item.icon className='w-5 h-5' />
-														)}
-														{item.label}
-													</div>
-													<div className="ml-2">
-														{isExpanded ? (
-															<ChevronDown className="w-4 h-4" />
-														) : (
-															<ChevronRight className="w-4 h-4" />
-														)}
-													</div>
+									<li key={index}>
+										{hasSubItems ? (
+											<div
+												className={`flex items-center justify-between cursor-pointer p-2 rounded transition-colors duration-200 ${active
+													? 'bg-white text-[var(--foreground)] font-medium'
+													: 'hover:bg-white hover:text-[var(--foreground)] hover:bg-opacity-20'
+													}`}
+												onClick={() => toggleItemExpand(index)}
+											>
+												<div className="flex items-center gap-3">
+													{item?.icon && <item.icon className="w-5 h-5" />}
+													<span className="truncate">{item.label}</span>
 												</div>
-
-											)
-											: (
-												<Link
-													href={item.href}
-													className={`flex items-center justify-between cursor-pointer p-2 rounded transition-colors duration-200 ${active
-														? 'bg-white text-[var(--foreground)] font-medium'
-														: 'hover:bg-white hover:text-[var(--foreground)] hover:bg-opacity-20'
-														}`}
-												>
-													<div className="flex items-center gap-3">
-														{item?.icon && (
-															<item.icon className='w-5 h-5' />
-														)}
-														{item.label}
-													</div>
-												</Link>
-											)
-									}
+												<div className="ml-2 flex-shrink-0">
+													{isExpanded ? (
+														<ChevronDown className="w-4 h-4" />
+													) : (
+														<ChevronRight className="w-4 h-4" />
+													)}
+												</div>
+											</div>
+										) : (
+											<Link
+												href={item.href}
+												className={`flex items-center justify-between p-2 rounded transition-colors duration-200 ${active
+													? 'bg-white text-[var(--foreground)] font-medium'
+													: 'hover:bg-white hover:text-[var(--foreground)] hover:bg-opacity-20'
+													}`}
+												onClick={() => (isMobile || isTablet) && setIsOpen(false)}
+											>
+												<div className="flex items-center gap-3">
+													{item?.icon && <item.icon className="w-5 h-5" />}
+													<span className="truncate">{item.label}</span>
+												</div>
+											</Link>
+										)}
 
 										{/* Render subItems if they exist and the item is expanded */}
 										{hasSubItems && isExpanded && (
@@ -162,11 +182,10 @@ export default function Sidebar({
 																	? 'bg-white text-[var(--foreground)] font-medium'
 																	: 'hover:bg-white hover:text-[var(--foreground)] hover:bg-opacity-20'
 																	}`}
+																onClick={() => (isMobile || isTablet) && setIsOpen(false)}
 															>
-																{subItem?.icon && (
-																	<subItem.icon className='w-4 h-4' />
-																)}
-																{subItem.label}
+																{subItem?.icon && <subItem.icon className="w-4 h-4" />}
+																<span className="truncate">{subItem.label}</span>
 															</Link>
 														</li>
 													);
@@ -179,22 +198,24 @@ export default function Sidebar({
 						</ul>
 					</nav>
 				</div>
-				<div className='absolute bottom-4 left-2 w-full flex items-center justify-center'>
-					<Button title={'Logout'} variant={'invert'} className='w-[200px] rounded-xl' icon={<LogOutIcon className='w-4 h-4 ml-2' />} iconPosition='right' />
-				</div>
-			</div>
 
-			{/* Main Content with dynamic width based on sidebar state */}
-			<div
-				className={`flex-1 flex flex-col overflow-hidden transition-all duration-300`}
-				style={{
-					marginLeft: !isMobile && isOpen ? `${sidebarWidthPx}px` : '0px',
-					width: '100%'
-				}}
-			>
-				{/* Top Bar - full width when sidebar is collapsed */}
-				<header className="border-b p-4 flex items-center justify-between transition-all duration-300 w-full">
-					<div className='flex items-center'>
+				{/* Sidebar Footer */}
+				<div className="p-4 flex justify-center">
+					<Button
+						title="Logout"
+						variant="invert"
+						className="w-full max-w-[200px] rounded-xl"
+						icon={<LogOutIcon className="w-4 h-4 ml-2" />}
+						iconPosition="right"
+					/>
+				</div>
+			</aside>
+
+			{/* Main Content */}
+			<div className="flex-1 flex flex-col overflow-hidden">
+				{/* Top Bar */}
+				<header className="border-b p-4 flex items-center justify-between w-full">
+					<div className="flex items-center">
 						{/* Toggle Button */}
 						<button
 							onClick={toggleSidebar}
@@ -203,23 +224,22 @@ export default function Sidebar({
 						>
 							<PanelLeft />
 						</button>
-						<h1 className="ml-4 text-xl font-semibold">{title}</h1>
+						<h1 className="ml-4 text-lg md:text-xl font-semibold">{title}</h1>
 					</div>
-					<div className='flex items-center gap-3'>
-						<button className='relative'>
-							<Bell className='w-6 h-6 ' />
-							<div className='absolute -top-1 right-0 p-[5px] bg-red-500 rounded-full'></div>
+					<div className="flex items-center gap-3">
+						<button className="relative" aria-label="Notifications">
+							<Bell className="w-5 h-5 md:w-6 md:h-6" />
+							<div className="absolute -top-1 right-0 p-[5px] bg-red-500 rounded-full"></div>
 						</button>
-						<User className='w-8 h-8 bg-[var(--primary)] text-[var(--background)] p-1.5 rounded-full' />
+						<User className="w-7 h-7 md:w-8 md:h-8 bg-[var(--primary)] text-[var(--background)] p-1.5 rounded-full" />
 					</div>
 				</header>
 
 				{/* Page Content */}
-				<main className="flex-1 overflow-y-auto p-6 transition-all duration-300">
+				<main className="flex-1 overflow-y-auto p-4 md:p-6">
 					{children}
 				</main>
 			</div>
 		</div>
 	);
 }
-

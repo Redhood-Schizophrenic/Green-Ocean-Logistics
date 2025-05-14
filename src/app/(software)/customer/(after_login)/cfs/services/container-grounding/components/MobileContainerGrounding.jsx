@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Search, Download, Eye } from 'lucide-react';
-import { specialEquipmentsRequest } from '@/constants/requests';
+import { Search, Upload, Download, Filter, X, Eye } from 'lucide-react';
+import { ContainerGroundingRequest } from '@/constants/requests';
 import Input from '@/components/ui/Input';
 
-const MobileSpecialEquipment = () => {
+const MobileContainerGrounding = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredRequests = specialEquipmentsRequest.filter(request => {
+  const filteredRequests = ContainerGroundingRequest.filter(request => {
     const matchesSearch =
       request.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
       request.containerNo.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -49,14 +49,12 @@ const MobileSpecialEquipment = () => {
           {filteredRequests.map((request, index) => (
             <div key={index} className="bg-[var(--accent)] rounded-lg p-3 mb-3 shadow-sm">
               <div className="flex justify-between items-start mb-1">
-                <div className="font-medium"># {request.id}</div>
+                <div className="font-medium">{request.id}</div>
                 <span className={`text-xs px-2 py-1 rounded-full ${getStatusBadgeClass(request.status)}`}>
                   {request.status}
                 </span>
               </div>
-              <div className="text-sm text-gray-600 mb-1">Order Id: {request.order.id}</div>
               <div className="text-sm text-gray-600 mb-1">Container: {request.containerNo}</div>
-              <div className="text-sm text-gray-600 mb-1">CFS: {request.order.cfs.title}</div>
               <div className="text-sm text-gray-600 mb-1">Equipment Type: {request.equipment}</div>
               <div className="flex justify-between items-center">
                 <p className="text-sm text-gray-600 mb-1">{request.date}</p>
@@ -77,4 +75,4 @@ const MobileSpecialEquipment = () => {
   );
 };
 
-export default MobileSpecialEquipment;
+export default MobileContainerGrounding;

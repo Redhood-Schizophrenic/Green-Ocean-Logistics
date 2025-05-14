@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Download } from 'lucide-react';
 import { specialEquipmentsRequest } from '@/constants/requests';
 import { DataTable } from '@/components/ui/Table';

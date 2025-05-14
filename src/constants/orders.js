@@ -13,9 +13,18 @@ export const orders = [
 		customer: {
 			id: 'abc'
 		},
+		uploadedOn: '10 January 2024',
 		fromDate: '10 January 2024',
 		toDate: '20 January 2024',
 		service: 'CFS',
+		commodityDescription: 'Pepsi',
+		pickUpLocation: 'Chennai Port',
+		containerSize: '20ft',
+		deliveryLocation: 'Warehouse no. 1, Coimbatore',
+		cargoType: 'Liquid',
+		expectedDate: '20 January 2024',
+		weight: '100',
+		status: 'Accepted',
 		containerMovement: [
 			{
 				status: 'Discharged',
@@ -68,9 +77,18 @@ export const orders = [
 		customer: {
 			id: 'abc'
 		},
+		uploadedOn: '7 May 2025',
 		fromDate: '7 May 2025',
 		toDate: '17 May 2025',
 		service: 'CFS',
+		commodityDescription: 'Lays',
+		pickUpLocation: 'Mumbai Seaport',
+		containerSize: '20ft',
+		deliveryLocation: 'Warehouse no. 15, Sector-5, Bhiwandi',
+		cargoType: 'Dry',
+		expectedDate: '20 January 2024',
+		weight: '50',
+		status: 'Rejected',
 		containerMovement: [
 			{
 				status: 'Discharged',
