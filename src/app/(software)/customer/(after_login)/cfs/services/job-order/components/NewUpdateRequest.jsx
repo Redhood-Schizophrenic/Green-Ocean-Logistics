@@ -7,13 +7,14 @@ import { Upload } from 'lucide-react';
 
 const NewUpdateRequest = () => {
   const [formData, setFormData] = useState({
+    orderId: '',
     selectedCFS: '',
     jobOrderNumber: '',
     updateDetails: '',
     updateReason: '',
     file: null
   });
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -21,14 +22,14 @@ const NewUpdateRequest = () => {
       [name]: value
     });
   };
-  
+
   const handleSelectChange = (value) => {
     setFormData({
       ...formData,
       selectedCFS: value
     });
   };
-  
+
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setFormData({
@@ -37,23 +38,23 @@ const NewUpdateRequest = () => {
       });
     }
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     console.log(formData);
   };
-  
+
   return (
     <div className="border-2 border-[var(--primary)] p-4 rounded-xl">
       <h1 className="text-lg font-semibold">Job Update Request</h1>
-      
+
       <form className="pt-4 flex flex-col gap-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">
             <Label title="CFS Name" />
-            <Select 
-              value={formData.selectedCFS} 
+            <Select
+              value={formData.selectedCFS}
               onValueChange={handleSelectChange}
               placeholder="Select CFS"
             >
@@ -61,11 +62,11 @@ const NewUpdateRequest = () => {
               <SelectItem value="cfs-b">CFS B</SelectItem>
             </Select>
           </div>
-          
+
           <div className="flex flex-col gap-2">
             <Label title="Job Order Number" />
-            <Input 
-              type="text" 
+            <Input
+              type="text"
               name="jobOrderNumber"
               placeholder="Enter job order number"
               value={formData.jobOrderNumber}
@@ -73,10 +74,10 @@ const NewUpdateRequest = () => {
             />
           </div>
         </div>
-        
+
         <div className="flex flex-col gap-2">
           <Label title="Requested Update Details" />
-          <textarea 
+          <textarea
             name="updateDetails"
             placeholder="Enter update details"
             value={formData.updateDetails}
@@ -85,10 +86,10 @@ const NewUpdateRequest = () => {
             className="w-full border border-input rounded-md p-2 bg-transparent text-[var(--foreground)] shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)] disabled:cursor-not-allowed disabled:opacity-50"
           />
         </div>
-        
+
         <div className="flex flex-col gap-2">
           <Label title="Reason for Update" />
-          <textarea 
+          <textarea
             name="updateReason"
             placeholder="Enter reason for update"
             value={formData.updateReason}
@@ -97,7 +98,7 @@ const NewUpdateRequest = () => {
             className="w-full border border-input rounded-md p-2 bg-transparent text-[var(--foreground)] shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)] disabled:cursor-not-allowed disabled:opacity-50"
           />
         </div>
-        
+
         <div className="flex flex-col gap-2">
           <Label title="Upload Supporting Document" />
           <div className="flex items-center gap-2">
@@ -121,11 +122,11 @@ const NewUpdateRequest = () => {
             Supported file types: PDF, JPG, PNG (max size: 5MB)
           </p>
         </div>
-        
+
         <div>
-          <Button 
-            title="Submit Update Request" 
-            icon={<Upload />} 
+          <Button
+            title="Submit Update Request"
+            icon={<Upload />}
             onClick={handleSubmit}
             className="rounded-xl"
           />
