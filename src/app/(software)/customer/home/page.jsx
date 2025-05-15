@@ -5,23 +5,31 @@ import HeaderLayout from "./components/HeaderLayout";
 import MobileHeaderLayout from "./components/MobileHeaderLayout";
 import { ServiceProviders, servicesList } from "@/constants/services";
 import Button from "@/components/ui/Button";
-import { SlidersHorizontalIcon, Star, MapPin, ChevronLeft, ChevronRight, } from 'lucide-react';
+import { SlidersHorizontalIcon, Star, MapPin, ChevronLeft, ChevronRight, Search, } from 'lucide-react';
 import Image from "next/image";
 import { Dialog } from "@/components/ui/Dialog";
 import { FilterCFS } from "./components/Filter";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Select, SelectItem } from "@/components/ui/Select";
 
 export default function ClientHomePage() {
 	const [currentService, setCurrentService] = useState('cfs');
-	const [serviceTitle, setServiceTitle] = useState('CFS')
+	const [serviceTitle, setServiceTitle] = useState('CFS');
 	const [filteredServices, setFilteredServices] = useState(ServiceProviders.filter((provider) => provider.serviceId === currentService));
+	const [filter, setFilter] = useState('');
+	const [SearchQuery, setSearchQuery] = useState('');
 	const [isOpen, setIsOpen] = useState(false);
 
 	useEffect(() => {
 		setServiceTitle(servicesList.find((service) => service.id === currentService).label);
-		setFilteredServices(ServiceProviders.filter((provider) => provider.serviceId === currentService));
-	}, [currentService])
-
+		setFilteredServices(ServiceProviders.filter(
+			(provider) => provider.serviceId === currentService && (
+				filter === 'location'
+					? provider.location.toLowerCase().includes(SearchQuery.toLowerCase())
+					: provider.title.toLowerCase().includes(SearchQuery.toLowerCase())
+			)
+		));
+	}, [currentService, SearchQuery]);
 
 	return (
 		<section className={`w-full h-[200dvh] items-center justify-center`}>
@@ -42,11 +50,27 @@ export default function ClientHomePage() {
 					>
 						<FilterCFS openDialog={setIsOpen} />
 					</Dialog>
-
-
 				</div>
 
-				<div className="flex flex-col md:gap-10 gap-4 pt-20">
+				<div className="flex items-center justify-between gap-4 w-full mt-10">
+					<div className="flex items-center justify-between gap-4 w-full">
+						<div className="flex items-center justify-between relative gap-4 w-full">
+							<Search className="absolute left-2 top-2 p-1 h-6 w-6 text-muted-foreground" />
+							<input
+								className={`flex pl-10 h-11 w-full bg-transparent rounded-md border border-input text-[var(--foreground)] px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-[var(--foreground)] placeholder:text-[var(--secondary)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm`}
+								placeholder={!useIsMobile() ? `Search ${serviceTitle} Service Providers...` : 'Search'}
+								value={SearchQuery}
+								onChange={(e) => setSearchQuery(e.target.value)}
+							/>
+						</div>
+						<Select value={filter} onValueChange={(value) => setFilter(value)} placeholder="-- Search By --" className='h-11'>
+							<SelectItem value={'title'}> By Name </SelectItem>
+							<SelectItem value={'location'}> By Location </SelectItem>
+						</Select>
+					</div>
+				</div>
+
+				<div className="flex flex-col md:gap-10 gap-4 pt-6">
 					{filteredServices.map((provider) => (
 						<ServiceCard
 							key={provider.id}
@@ -118,7 +142,7 @@ const ServiceCard = ({ title, location, rating, tags, description, images, id })
 				<div>
 					<h3 className="text-2xl font-semibold">{title}</h3>
 					<div className="flex items-center mt-2 text-gray-600">
-						<MapPin className="mr-1" />
+						<MapPin className="mr-1 w-5 h-5" />
 						<span className="">{location}</span>
 					</div>
 					<div className="flex flex-wrap items-center gap-4 mt-4 text-gray-600">

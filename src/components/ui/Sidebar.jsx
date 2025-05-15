@@ -1,11 +1,12 @@
 import { useSidebar } from '@/contexts/SidebarProvider';
 import { CompanyName } from '@/constants/CompanyName';
-import { Bell, LogOutIcon, PanelLeft, User, ChevronDown, ChevronRight, X } from 'lucide-react';
+import { Bell, LogOutIcon, PanelLeft, User, ChevronDown, ChevronRight, X, MessageSquare, CircleUserRound, Sailboat, Settings, LayoutDashboard } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Button from './Button';
 import { navLinks } from '@/constants/navLinks';
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link';
+import { Popover } from './Popover';
 
 export default function Sidebar({
 	children,
@@ -21,6 +22,22 @@ export default function Sidebar({
 	const { open: isOpen, setOpen: setIsOpen, title } = useSidebar();
 	const currentPath = usePathname();
 	const router = useRouter();
+
+	const menuItems = [
+		{ icon: <MessageSquare className='text-[var(--foreground)]' />, text: "Messages" },
+		{ icon: <CircleUserRound className='text-[var(--foreground)]' />, text: "Profile" },
+		{ icon: <LayoutDashboard className='text-[var(--foreground)]' />, text: "Dashboard" },
+	];
+
+	const hostItems = [
+		{
+			title: "Merchant Login",
+			description: "Get started with Merchant Side.",
+			icon: <Sailboat className='text-[var(--foreground)]' />
+		},
+		{ title: "Refer Co-Workers", icon: null },
+		{ title: "Log out", icon: <LogOutIcon className='w-5 h-5 text-[var(--foreground)]' /> }
+	];
 
 	// Check screen size and adjust layout accordingly
 	useEffect(() => {
@@ -241,7 +258,45 @@ export default function Sidebar({
 							<Bell className="w-5 h-5 md:w-6 md:h-6" />
 							<div className="absolute -top-1 right-0 p-[5px] bg-red-500 rounded-full"></div>
 						</button>
-						<User className="w-7 h-7 md:w-8 md:h-8 bg-[var(--primary)] text-[var(--background)] p-1.5 rounded-full" />
+						<Popover
+							trigger={
+								<User className="w-7 h-7 md:w-8 md:h-8 bg-[var(--primary)] text-[var(--background)] p-1.5 rounded-full" />
+							}
+						>
+							<div className="w-64">
+								{/* Regular menu items */}
+								<div className="py-4">
+									{menuItems.map((item, index) => (
+										<div key={index} className="flex items-center py-1.5 px-4 hover:bg-[var(--background)] cursor-pointer">
+											<span className="w-6 text-center mr-4">{item.icon}</span>
+											<span className="text-gray-800 text-sm">{item.text}</span>
+										</div>
+									))}
+								</div>
+
+								{/* Divider */}
+								<div className="flex items-center justify-center">
+									<div className="border-t border-[var(--foreground)]/20 my-1 px-2 w-[90%]"></div>
+								</div>
+
+								{/* Host section */}
+								<div className="pt-2 pb-2">
+									{hostItems.map((item, index) => (
+										<div key={index} className="flex items-start py-3 px-4 hover:bg-gray-100 cursor-pointer">
+											<div className="flex-1">
+												<div className="text-gray-800 text-sm">{item.title}</div>
+												{item.description && (
+													<div className="text-gray-500 text-xs mt-1">{item.description}</div>
+												)}
+											</div>
+											{item.icon && (
+												<div className="ml-2 text-lg">{item.icon}</div>
+											)}
+										</div>
+									))}
+								</div>
+							</div>
+						</Popover>
 					</div>
 				</header>
 

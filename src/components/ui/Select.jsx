@@ -4,7 +4,7 @@ import { Check, ChevronDown, ChevronUp } from "lucide-react"
 // Helper function for combining class names (simplified version of cn utility)
 const cn = (...classes) => classes.filter(Boolean).join(" ")
 
-export const Select = ({ children, value, onValueChange, disabled, placeholder = 'Select an option' }, className = '') => {
+export const Select = ({ children, value, onValueChange, disabled, placeholder = 'Select an option', className = '', allowBorders = true }) => {
 	const [open, setOpen] = React.useState(false)
 	const [selectedValue, setSelectedValue] = React.useState(value || "")
 
@@ -49,7 +49,7 @@ export const Select = ({ children, value, onValueChange, disabled, placeholder =
 		<div className="relative" ref={selectRef}>
 			<button
 				type="button"
-				className={`flex h-9 min-w-[200px] w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background focus:outline-none focus:ring-1 focus:ring-ring
+				className={`flex h-9 min-w-[200px] w-full items-center justify-between whitespace-nowrap rounded-md ${allowBorders ? 'border' : 'border-none'} border-input bg-transparent px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-1 focus:ring-ring
 					${disabled && "cursor-not-allowed opacity-50"} ${className}`}
 				onClick={() => !disabled && setOpen(!open)}
 				disabled={disabled}
@@ -64,7 +64,7 @@ export const Select = ({ children, value, onValueChange, disabled, placeholder =
 			{open && (
 				<div
 					ref={contentRef}
-					className="absolute z-50 w-full min-w-[8rem] overflow-hidden rounded-md border bg-[var(--background)] shadow-md animate-in fade-in-0 zoom-in-95 mt-1"
+					className="absolute z-50 w-full min-w-[8rem] overflow-hidden rounded-md  border bg-[var(--background)] shadow-md animate-in fade-in-0 zoom-in-95 mt-1"
 				>
 					<div className="p-1 max-h-60 overflow-auto">
 						{options.map((option, index) => (

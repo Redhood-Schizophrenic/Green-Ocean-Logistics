@@ -201,7 +201,7 @@ export default function ChatBot() {
 			const currentTime = Date.now();
 
 			// Check if we should show a notification based on time and dismissal state
-			const timeToWait = longDismissal ? 15 * 60 * 1000 : 15 * 1000; // 15 minutes or 15 seconds
+			const timeToWait = longDismissal ? 150 * 60 * 1000 : 15 * 1000; // 15 minutes or 15 seconds
 
 			if (!isOpen && currentTime - lastProactiveTime > timeToWait) {
 				// Show a temporary notification without opening the full chat

@@ -1,6 +1,7 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import ChatBot from "@/components/utils/Chatbot";
+import { Toaster } from "sonner";
 const font = Outfit({ subsets: ["latin"], });
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default function MainRootLayout({ children }) {
       >
         {children}
         <ChatBot />
+        <Toaster richColors={true} closeButton={true} expand={true} position="top-right" />
       </body>
     </html>
   );
