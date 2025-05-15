@@ -15,7 +15,6 @@ export default function RescanRequestPage() {
 
 	return (
 		<section className="grid gap-8">
-			<Form />
 			{
 				useIsMobile() ? (
 					<MobileRequestList />

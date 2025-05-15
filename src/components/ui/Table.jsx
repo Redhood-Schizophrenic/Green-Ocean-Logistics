@@ -114,7 +114,7 @@ export function DataTable({
 							<tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted rounded-lg" key={headerGroup.id}>
 								{headerGroup.headers.map((header) => (
 									<th
-										className="h-10 px-2 text-left align-middle font-semibold bg-[var(--accent)] [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+										className="h-10 px-2 text-center align-middle font-semibold bg-[var(--accent)] [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
 										key={header.id}
 									>
 										{header.isPlaceholder
@@ -137,7 +137,7 @@ export function DataTable({
 									data-state={row.getIsSelected() && "selected"}
 								>
 									{row.getVisibleCells().map((cell) => (
-										<td className="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]" key={cell.id}>
+										<td className="p-2 align-middle text-center [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]" key={cell.id}>
 											{flexRender(
 												cell.column.columnDef.cell,
 												cell.getContext()

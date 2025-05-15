@@ -15,7 +15,6 @@ export default function JobOrderUpdatePage() {
 
 	return (
 		<section className="grid gap-8">
-			<NewUpdateRequest />
 			{
 				useIsMobile() ? (
 					<MobileJobOrder />

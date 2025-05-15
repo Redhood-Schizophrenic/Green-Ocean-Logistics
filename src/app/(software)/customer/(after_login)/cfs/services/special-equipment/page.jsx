@@ -15,7 +15,6 @@ export default function SpecialEquipmentRequestPage() {
 
 	return (
 		<section className="grid gap-8">
-			<NewSpecialEquipment />
 			{
 				useIsMobile() ? (
 					<MobileSpecialEquipment />

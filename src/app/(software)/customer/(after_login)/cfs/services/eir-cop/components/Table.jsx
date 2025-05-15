@@ -1,10 +1,6 @@
 import { Download, FileText } from 'lucide-react';
 import { DataTable } from '@/components/ui/Table';
 import { eirRequests } from '@/constants/requests';
-import { Dialog } from '@/components/ui/Dialog';
-import Button from '@/components/ui/Button';
-import Label from '@/components/ui/Label';
-import { Select } from '@/components/ui/Select';
 import NewRequests from '../../../../components/NewRequests';
 
 export default function RequestList() {

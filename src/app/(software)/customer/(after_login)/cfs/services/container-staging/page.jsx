@@ -15,7 +15,6 @@ export default function ContainerStagingPage() {
 
 	return (
 		<section className="grid gap-8">
-			<NewStagingRequest />
 			{
 				useIsMobile() ? (
 					<MobileStagingRequest />

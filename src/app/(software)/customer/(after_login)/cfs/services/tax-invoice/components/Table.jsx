@@ -1,6 +1,7 @@
 import { Download } from 'lucide-react';
 import { taxInvoiceRequests } from '@/constants/requests';
 import { DataTable } from '@/components/ui/Table';
+import NewRequests from '../../../../components/NewRequests';
 
 export default function RequestList() {
   const columns = [
@@ -100,7 +101,10 @@ export default function RequestList() {
 
   return (
     <div className="border rounded-lg p-6 mb-4">
-      <h2 className="text-xl font-semibold text-green-900 mb-4">Requests List</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-green-900 mb-4">Requests List</h2>
+        <NewRequests />
+      </div>
       <DataTable columns={columns} data={taxInvoiceRequests} />
     </div>
   )

@@ -1,61 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Eye, Download } from 'lucide-react';
 import { DataTable } from '@/components/ui/Table';
+import { ContainerGroundingRequest } from '@/constants/requests';
+import NewRequests from '../../../../components/NewRequests';
 
 const OrderListRequest = () => {
-
-  const initialOrders = [
-    {
-      id: "GRD001",
-      containerNo: "TGHU1234567",
-      cfsName: "CFS A",
-      date: "2024-02-15",
-      status: "Ready"
-    },
-    {
-      id: "GRD002",
-      containerNo: "MSCU7894561",
-      cfsName: "CFS B",
-      date: "2024-02-14",
-      status: "Pending"
-    },
-    {
-      id: "GRD003",
-      containerNo: "CMAU6543210",
-      cfsName: "CFS C",
-      date: "2024-02-13",
-      status: "Rejected"
-    },
-    {
-      id: "GRD003",
-      containerNo: "CMAU6543210",
-      cfsName: "CFS C",
-      date: "2024-02-13",
-      status: "Rejected"
-    }
-  ];
-
-  const [orders, setOrders] = useState(initialOrders);
-  const [selectedCFS, setSelectedCFS] = useState('');
-
-  const filterOrders = () => {
-    let filtered = [...initialOrders];
-
-    if (selectedCFS) {
-      filtered = filtered.filter(order => order.cfsName === selectedCFS);
-    }
-
-    setOrders(filtered);
-  };
-
-  useEffect(() => {
-    filterOrders();
-  }, [selectedCFS]);
-
-
   const getStatusBadgeClass = (status) => {
     switch (status.toLowerCase()) {
-      case 'ready':
+      case 'accepted':
         return 'bg-green-100 text-green-800';
       case 'pending':
         return 'bg-yellow-100 text-yellow-800';
@@ -70,9 +22,16 @@ const OrderListRequest = () => {
     {
       id: 'id',
       accessorKey: 'id',
-      header: 'Order ID',
+      header: 'Request ID',
       filterable: true,
       cell: ({ row }) => <div>{row.original.id}</div>,
+    },
+    {
+      id: 'orderId',
+      accessorKey: 'orderId',
+      header: 'Order ID',
+      filterable: true,
+      cell: ({ row }) => <div>{row.original.order.id}</div>,
     },
     {
       id: 'container-no',
@@ -86,7 +45,7 @@ const OrderListRequest = () => {
       accessorKey: 'cfsName',
       header: 'CFS Name',
       filterable: true,
-      cell: ({ row }) => <div>{row.original.cfsName}</div>,
+      cell: ({ row }) => <div>{row.original.order.cfs.title}</div>,
     },
     {
       id: 'date',
@@ -109,7 +68,7 @@ const OrderListRequest = () => {
       header: 'Status',
       filterable: true,
       cell: ({ row }) => (
-        <div className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusBadgeClass(row.original.status)}`}>
+        <div className={`rounded-full px-2.5 py-0.5 text-xs font-medium text-center ${getStatusBadgeClass(row.original.status)}`}>
           {row.original.status}
         </div>
       ),
@@ -120,7 +79,7 @@ const OrderListRequest = () => {
       header: 'Actions',
       filterable: false,
       cell: ({ row }) => (
-        <div className="flex space-x-2">
+        <div className="flex items-center justify-center gap-2">
           <Eye
             size={16}
             className="cursor-pointer text-gray-600 hover:text-gray-900"
@@ -138,8 +97,11 @@ const OrderListRequest = () => {
 
   return (
     <div className="border rounded-lg p-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Order List Request</h2>
-      <DataTable columns={columns} data={orders} />
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-green-900 mb-4">Requests List</h2>
+        <NewRequests />
+      </div>
+      <DataTable columns={columns} data={ContainerGroundingRequest} />
     </div>
   );
 };

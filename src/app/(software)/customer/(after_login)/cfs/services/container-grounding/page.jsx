@@ -8,16 +8,13 @@ import MobileContainerGrounding from "./components/MobileContainerGrounding";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function ContainerGroundingPage() {
-
 	const { setTitle } = useSidebar();
-
 	useEffect(() => {
 		setTitle('Container Grounding Request')
 	}, []);
 
 	return (
 		<section className="grid gap-8">
-			<NewGroundingRequest />
 			{
 				useIsMobile() ? (
 					<MobileContainerGrounding />

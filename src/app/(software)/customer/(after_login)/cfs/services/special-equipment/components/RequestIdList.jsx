@@ -2,6 +2,7 @@ import React from 'react';
 import { Download } from 'lucide-react';
 import { specialEquipmentsRequest } from '@/constants/requests';
 import { DataTable } from '@/components/ui/Table';
+import NewRequests from '../../../../components/NewRequests';
 
 const RequestIdList = () => {
 
@@ -102,7 +103,10 @@ const RequestIdList = () => {
 
   return (
     <div className="border rounded-lg p-6 mb-4">
-      <h2 className="text-xl font-semibold text-green-900 mb-4">Request Id List</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-green-900 mb-4">Requests List</h2>
+        <NewRequests />
+      </div>
       <DataTable columns={columns} data={specialEquipmentsRequest} />
     </div>
   );

@@ -2,6 +2,7 @@ import { DataTable } from '@/components/ui/Table';
 import { weightmentRequests } from '@/constants/requests';
 import { Download } from 'lucide-react';
 import React from 'react';
+import NewRequests from '../../../../components/NewRequests';
 
 const RequestList = () => {
   const columns = [
@@ -84,7 +85,10 @@ const RequestList = () => {
 
   return (
     <div className="border rounded-lg p-6">
-      <h2 className="text-xl font-semibold text-green-900 mb-4">Request List</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-green-900 mb-4">Requests List</h2>
+        <NewRequests />
+      </div>
       <DataTable columns={columns} data={weightmentRequests} />
     </div>
   );

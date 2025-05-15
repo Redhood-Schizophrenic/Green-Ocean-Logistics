@@ -3,35 +3,36 @@ import { DataTable } from '@/components/ui/Table';
 import Input from '@/components/ui/Input';
 import { Select, SelectItem } from '@/components/ui/Select';
 import { Search, Eye, Download } from 'lucide-react';
+import NewRequests from '../../../../components/NewRequests';
 
 const PreviousJobRequest = () => {
-  
+
   const jobRequests = [
-    { 
-      id: 'JO001', 
-      jobOrderNo: 'JORD-2301', 
-      cfsName: 'CFS A', 
-      date: '01-May-2025', 
-      status: 'Approved' 
+    {
+      id: 'JO001',
+      jobOrderNo: 'JORD-2301',
+      cfsName: 'CFS A',
+      date: '01-May-2025',
+      status: 'Approved'
     },
-    { 
-      id: 'JO002', 
-      jobOrderNo: 'JORD-2302', 
-      cfsName: 'CFS B', 
-      date: '03-May-2025', 
-      status: 'Pending' 
+    {
+      id: 'JO002',
+      jobOrderNo: 'JORD-2302',
+      cfsName: 'CFS B',
+      date: '03-May-2025',
+      status: 'Pending'
     },
-    { 
-      id: 'JO003', 
-      jobOrderNo: 'JORD-2310', 
-      cfsName: 'CFS A', 
-      date: '05-May-2025', 
-      status: 'Rejected' 
+    {
+      id: 'JO003',
+      jobOrderNo: 'JORD-2310',
+      cfsName: 'CFS A',
+      date: '05-May-2025',
+      status: 'Rejected'
     }
   ];
-  
+
   const getStatusClass = (status) => {
-    switch(status) {
+    switch (status) {
       case 'Approved':
         return 'bg-green-100 text-green-800 border border-green-300';
       case 'Pending':
@@ -43,7 +44,7 @@ const PreviousJobRequest = () => {
     }
   };
 
-  
+
   const columns = [
     {
       id: 'id',
@@ -91,12 +92,12 @@ const PreviousJobRequest = () => {
       filterable: false,
       cell: ({ row }) => (
         <div className="flex space-x-3">
-          <Eye 
+          <Eye
             size={18}
             className="cursor-pointer text-[var(--primary)]"
             onClick={() => console.log('View details for', row.original.id)}
           />
-          <Download 
+          <Download
             size={18}
             className="cursor-pointer text-[var(--primary)]"
             onClick={() => console.log('Download document for', row.original.id)}
@@ -105,11 +106,14 @@ const PreviousJobRequest = () => {
       ),
     }
   ];
-  
+
   return (
     <div className="border-2 border-[var(--primary)] p-4 rounded-xl mt-8">
-      <h1 className="text-lg font-semibold">Previous Job Order Update Requests</h1>
-      
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-green-900 mb-4">Requests List</h2>
+        <NewRequests />
+      </div>
+
       <DataTable
         columns={columns}
         data={jobRequests}

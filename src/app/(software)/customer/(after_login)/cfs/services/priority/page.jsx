@@ -15,7 +15,6 @@ export default function PriorityRequestPage() {
 
 	return (
 		<section className="grid gap-8">
-			<Form />
 			{
 				useIsMobile() ? (
 					<MobileRequestList />

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Search, Download, } from 'lucide-react';
 import { rescanRequests } from '@/constants/requests';
 import Input from '@/components/ui/Input';
+import NewRequests from '../../../../components/NewRequests';
 
 export default function MobileRequestList() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,6 +33,9 @@ export default function MobileRequestList() {
     <div className="border rounded-xl flex flex-col p-4">
       <div className="flex-1 overflow-y-auto">
         <h2 className="text-xl font-semibold text-green-900 mb-4">Request List</h2>
+        <div className="flex items-center justify-end">
+          <NewRequests />
+        </div>
         <div className="px-4 py-8 flex items-center justify-between">
           <div className="relative flex-1 mr-2">
             <Input

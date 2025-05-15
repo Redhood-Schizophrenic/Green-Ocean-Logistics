@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Download } from 'lucide-react';
 import { DataTable } from '@/components/ui/Table';
+import NewRequests from '../../../../components/NewRequests';
 
 const OrderIdList = () => {
 
@@ -109,7 +110,10 @@ const OrderIdList = () => {
 
   return (
     <div className="border rounded-lg p-6 mb-6 shadow-sm">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Order Id List</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-green-900 mb-4">Requests List</h2>
+        <NewRequests />
+      </div>
       <DataTable columns={columns} data={filteredData} />
     </div>
   );

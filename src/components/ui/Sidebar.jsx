@@ -4,7 +4,7 @@ import { Bell, LogOutIcon, PanelLeft, User, ChevronDown, ChevronRight, X } from 
 import { useState, useEffect } from 'react';
 import Button from './Button';
 import { navLinks } from '@/constants/navLinks';
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link';
 
 export default function Sidebar({
@@ -12,19 +12,21 @@ export default function Sidebar({
 	defaultOpen = true,
 	sidebarClassWidth = "w-[300px]", // Use tailwind class instead of fixed px
 	sidebarColor = "bg-[var(--primary)]",
-	sidebarItems = navLinks
+	access = 'Customer',
+	sidebarItems = navLinks.filter((link) => link.access === access)
 }) {
 	const [isMobile, setIsMobile] = useState(false);
 	const [isTablet, setIsTablet] = useState(false);
 	const [expandedItems, setExpandedItems] = useState({});
 	const { open: isOpen, setOpen: setIsOpen, title } = useSidebar();
 	const currentPath = usePathname();
+	const router = useRouter();
 
 	// Check screen size and adjust layout accordingly
 	useEffect(() => {
 		const checkScreenSize = () => {
 			const mobile = window.innerWidth < 640; // sm breakpoint
-			const tablet = window.innerWidth >= 640 && window.innerWidth < 1024; // md to lg
+			const tablet = window.innerWidth >= 640 && window.innerWidth < 768; // md to lg
 
 			setIsMobile(mobile);
 			setIsTablet(tablet);
@@ -206,6 +208,14 @@ export default function Sidebar({
 						variant="invert"
 						className="w-full max-w-[200px] rounded-xl"
 						icon={<LogOutIcon className="w-4 h-4 ml-2" />}
+						onClick={() => access === 'Customer' ?
+							router.push('/customer/home')
+							: (
+								access === 'Client'
+									? router.push('/client/home')
+									: router.push('/')
+							)
+						}
 						iconPosition="right"
 					/>
 				</div>
