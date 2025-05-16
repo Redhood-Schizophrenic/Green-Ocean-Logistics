@@ -1,4 +1,40 @@
-export const weightmentRequests = [
+export const requestsList = [
+	{
+		id: 'EIR-001',
+		order: {
+			id: 'ORD-001',
+			cfs: {
+				id: 'chennai-cfs',
+				title: "Chennai Port CFS",
+				location: "Chennai Port, Tamil Nadu",
+			},
+		},
+		date: '10 January 2024',
+		status: 'Pending',
+		documents: ['dummy.pdf'],
+		remarks: "Urgent Processing",
+		reason: "",
+		collection: 'requests',
+		serviceType: 'EIR / COP',
+	},
+	{
+		id: 'PMR-001',
+		order: {
+			id: 'ORD-001',
+			cfs: {
+				id: 'chennai-cfs',
+				title: "Chennai Port CFS",
+				location: "Chennai Port, Tamil Nadu",
+			},
+		},
+		date: '10 January 2024',
+		status: 'Pending',
+		documents: ['dummy.pdf'],
+		remarks: "Need by tomorrow",
+		reason: "",
+		collection: 'requests',
+		serviceType: 'Priority Movement',
+	},
 	{
 		id: 'WSR-001',
 		order: {
@@ -9,10 +45,13 @@ export const weightmentRequests = [
 				location: "Chennai Port, Tamil Nadu",
 			},
 		},
-		containerNo: 'MSCU1234567',
 		date: '10 January 2024',
 		status: 'Accepted',
-		filePath: '/weighment.pdf',
+		documents: ['dummy.pdf'],
+		remarks: "Urgent Processing",
+		reason: "Verified Documents",
+		collection: 'requests',
+		serviceType: 'Weightment Slip',
 	},
 	{
 		id: 'WSR-002',
@@ -24,13 +63,14 @@ export const weightmentRequests = [
 				location: "Chennai Port, Tamil Nadu",
 			},
 		},
-		containerNo: 'TGHU1234567',
 		date: '10 January 2024',
 		status: 'Rejected',
+		documents: ['dummy.pdf'],
+		remarks: "Requested change",
+		reason: "Missing documents",
+		collection: 'requests',
+		serviceType: 'Weightment Slip',
 	},
-];
-
-export const specialEquipmentsRequest = [
 	{
 		id: 'SER-001',
 		order: {
@@ -41,10 +81,13 @@ export const specialEquipmentsRequest = [
 				location: "Chennai Port, Tamil Nadu",
 			},
 		},
-		containerNo: 'TGHU234567',
-		equipment: 'Forklift',
-		date: '2024-02-14',
+		date: '10 January 2024',
 		status: 'Accepted',
+		documents: ['dummy.pdf'],
+		remarks: "Requested by Consingnee",
+		reason: "Verified Documents",
+		collection: 'requests',
+		serviceType: 'Special Equipments',
 	},
 	{
 		id: 'SER-002',
@@ -56,46 +99,16 @@ export const specialEquipmentsRequest = [
 				location: "Chennai Port, Tamil Nadu",
 			},
 		},
-		containerNo: 'MSCU789456',
-		equipment: 'Crane',
-		date: '2024-02-15',
-		status: 'Pending',
-	},
-	{
-		id: 'SER-003',
-		order: {
-			id: 'ORD-002',
-			cfs: {
-				id: 'mumbai-central-terminal',
-				title: 'Mumbai CFS Terminal',
-				location: "Nhava Sheva, Mumbai, Maharashtra",
-			},
-		},
-		containerNo: 'CMAU654321',
-		equipment: 'Lowbed',
-		date: '2024-02-13',
+		date: '10 January 2024',
 		status: 'Rejected',
+		documents: ['dummy.pdf'],
+		remarks: "Requested by Consingnee",
+		reason: "Not available right now",
+		collection: 'requests',
+		serviceType: 'Special Equipments',
 	},
 	{
-		id: 'SER-004',
-		order: {
-			id: 'ORD-002',
-			cfs: {
-				id: 'mumbai-central-terminal',
-				title: 'Mumbai CFS Terminal',
-				location: "Nhava Sheva, Mumbai, Maharashtra",
-			},
-		},
-		containerNo: 'TGHU234567',
-		equipment: 'Forklift',
-		date: '2024-02-15',
-		status: 'Accepted',
-	},
-];
-
-export const chequeRequests = [
-	{
-		id: 'CAR-001',
+		id: 'CGR-002',
 		order: {
 			id: 'ORD-001',
 			cfs: {
@@ -104,15 +117,16 @@ export const chequeRequests = [
 				location: "Chennai Port, Tamil Nadu",
 			},
 		},
-		containerNo: 'MSCU1234567',
-		amount: 25000,
 		date: '10 January 2024',
 		status: 'Accepted',
-		reason: 'Nothing',
-		filePath: '/logo.png',
+		documents: ['dummy.pdf'],
+		remarks: "Requested by Consingnee",
+		reason: "Verified",
+		collection: 'requests',
+		serviceType: 'Container Grounding',
 	},
 	{
-		id: 'CAR-002',
+		id: 'CSR-001',
 		order: {
 			id: 'ORD-001',
 			cfs: {
@@ -121,16 +135,14 @@ export const chequeRequests = [
 				location: "Chennai Port, Tamil Nadu",
 			},
 		},
-		amount: 18000,
-		containerNo: 'TGHU1234567',
 		date: '10 January 2024',
-		filePath: '/logo.png',
-		reason: 'Nothing',
-		status: 'Rejected',
+		status: 'Accepted',
+		documents: ['dummy.pdf'],
+		remarks: "Urgent Processing",
+		reason: "Verified Documents",
+		collection: 'requests',
+		serviceType: 'Container Staging',
 	},
-];
-
-export const rescanRequests = [
 	{
 		id: 'RSR-001',
 		order: {
@@ -141,15 +153,16 @@ export const rescanRequests = [
 				location: "Chennai Port, Tamil Nadu",
 			},
 		},
-		containerNo: 'MSCU1234567',
-		previousDate: '10 January 2024',
-		requestedDate: '15 January 2024',
-		status: 'Accepted',
-		reason: 'Nothing',
-		filePath: '',
+		date: '10 January 2024',
+		status: 'Pending',
+		documents: ['dummy.pdf'],
+		remarks: "Unequal Weight from start",
+		reason: "",
+		collection: 'requests',
+		serviceType: 'Re-Scanning',
 	},
 	{
-		id: 'RSR-002',
+		id: 'CAR-001',
 		order: {
 			id: 'ORD-001',
 			cfs: {
@@ -158,16 +171,14 @@ export const rescanRequests = [
 				location: "Chennai Port, Tamil Nadu",
 			},
 		},
-		containerNo: 'TGHU1234567',
-		previousDate: '10 January 2024',
-		requestedDate: '15 January 2024',
-		filePath: '',
-		reason: 'Nothing',
-		status: 'Rejected',
+		date: '10 January 2024',
+		status: 'Pending',
+		documents: ['dummy.pdf'],
+		remarks: "",
+		reason: "",
+		collection: 'requests',
+		serviceType: 'Cheque Acceptance',
 	},
-];
-
-export const taxInvoiceRequests = [
 	{
 		id: 'TIR-001',
 		order: {
@@ -178,280 +189,14 @@ export const taxInvoiceRequests = [
 				location: "Chennai Port, Tamil Nadu",
 			},
 		},
-		containerNo: 'MSCU1234567',
-		from: '10 January 2024',
-		to: '21 January 2024',
-		status: 'Accepted',
-		invoiceNo: 'INV-001',
-		gstin: 'INSN20232930',
-		note: '',
-		filePath: '',
-	},
-	{
-		id: 'TIR-002',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'TGHU1234567',
-		from: '10 January 2024',
-		to: '21 January 2024',
-		status: 'Rejected',
-		invoiceNo: 'INV-001',
-		gstin: 'INSN20232930',
-		note: '',
-		filePath: '',
-	},
-];
-
-export const eirRequests = [
-	{
-		id: 'EIR-001',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'MSCU1234567',
-		requestedOn: '10 January 2024',
-		status: 'Accepted',
-		filePath: '',
-	},
-	{
-		id: 'EIR-002',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'TGHU1234567',
-		requestedOn: '10 January 2024',
-		status: 'Rejected',
-		filePath: '',
-	}
-];
-
-export const priorityMovementRequests = [
-	{
-		id: 'PMR-001',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'MSCU1234567',
-		requestedOn: '10 January 2024',
-		title: 'Arrived',
-		remarks: 'Arrived',
-		filePath: '',
-	},
-	{
-		id: 'PMR-002',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'MSCU1234567',
-		requestedOn: '10 January 2024',
-		title: 'Custom Processes',
-		remarks: 'Custom Processes',
-		filePath: '',
-	},
-	{
-		id: 'PMR-003',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'MSCU1234567',
-		requestedOn: '12 January 2024',
-		title: 'Custom Cleared',
-		remarks: 'Custom Cleared',
-		filePath: '',
-	},
-	{
-		id: 'PMR-004',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'MSCU1234567',
-		requestedOn: '15 January 2024',
-		title: 'Departed',
-		remarks: 'Departed',
-		filePath: '',
-	},
-	{
-		id: 'PMR-005',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'MSCU1234567',
-		requestedOn: '21 January 2024',
-		title: 'Delivered',
-		remarks: 'Delivered',
-		filePath: '',
-	},
-];
-
-export const ContainerGroundingRequest = [
-	{
-		id: 'GRD-001',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'TGHU234567',
-		size: '20',
-		date: '2024-02-14',
-		status: 'Accepted',
-	},
-	{
-		id: 'GRD-002',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'MSCU789456',
-		size: '40',
-		date: '2024-02-15',
+		date: '10 January 2024',
 		status: 'Pending',
+		documents: ['dummy.pdf'],
+		remarks: "",
+		reason: "",
+		collection: 'requests',
+		serviceType: 'Tax Invoice',
 	},
-	{
-		id: 'GRD-003',
-		order: {
-			id: 'ORD-002',
-			cfs: {
-				id: 'mumbai-central-terminal',
-				title: 'Mumbai CFS Terminal',
-				location: "Nhava Sheva, Mumbai, Maharashtra",
-			},
-		},
-		containerNo: 'CMAU654321',
-		size: '20',
-		date: '2024-02-13',
-		status: 'Rejected',
-	},
-	{
-		id: 'GRD-004',
-		order: {
-			id: 'ORD-002',
-			cfs: {
-				id: 'mumbai-central-terminal',
-				title: 'Mumbai CFS Terminal',
-				location: "Nhava Sheva, Mumbai, Maharashtra",
-			},
-		},
-		containerNo: 'TGHU234567',
-		size: '40',
-		date: '2024-02-15',
-		status: 'Accepted',
-	},
-
-];
-
-export const ContainerStagingRequest = [
-	{
-		id: 'STG-001',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'TGHU234567',
-		size: '20',
-		date: '2024-02-14',
-		status: 'Accepted',
-	},
-	{
-		id: 'STG-002',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'MSCU789456',
-		size: '40',
-		date: '2024-02-15',
-		status: 'Pending',
-	},
-	{
-		id: 'STG-003',
-		order: {
-			id: 'ORD-002',
-			cfs: {
-				id: 'mumbai-central-terminal',
-				title: 'Mumbai CFS Terminal',
-				location: "Nhava Sheva, Mumbai, Maharashtra",
-			},
-		},
-		containerNo: 'CMAU654321',
-		size: '20',
-		date: '2024-02-13',
-		status: 'Rejected',
-	},
-	{
-		id: 'STG-004',
-		order: {
-			id: 'ORD-002',
-			cfs: {
-				id: 'mumbai-central-terminal',
-				title: 'Mumbai CFS Terminal',
-				location: "Nhava Sheva, Mumbai, Maharashtra",
-			},
-		},
-		containerNo: 'TGHU234567',
-		size: '40',
-		date: '2024-02-15',
-		status: 'Accepted',
-	},
-];
-
-export const JobUpdateRequest = [
 	{
 		id: 'JUR-001',
 		order: {
@@ -462,54 +207,12 @@ export const JobUpdateRequest = [
 				location: "Chennai Port, Tamil Nadu",
 			},
 		},
-		containerNo: 'TGHU234567',
-		size: '20',
-		date: '2024-02-14',
-		status: 'Accepted',
-	},
-	{
-		id: 'JUR-002',
-		order: {
-			id: 'ORD-001',
-			cfs: {
-				id: 'chennai-cfs',
-				title: "Chennai Port CFS",
-				location: "Chennai Port, Tamil Nadu",
-			},
-		},
-		containerNo: 'MSCU789456',
-		size: '40',
-		date: '2024-02-15',
+		date: '10 January 2024',
 		status: 'Pending',
-	},
-	{
-		id: 'JUR-003',
-		order: {
-			id: 'ORD-002',
-			cfs: {
-				id: 'mumbai-central-terminal',
-				title: 'Mumbai CFS Terminal',
-				location: "Nhava Sheva, Mumbai, Maharashtra",
-			},
-		},
-		containerNo: 'CMAU654321',
-		size: '20',
-		date: '2024-02-13',
-		status: 'Rejected',
-	},
-	{
-		id: 'JUR-004',
-		order: {
-			id: 'ORD-002',
-			cfs: {
-				id: 'mumbai-central-terminal',
-				title: 'Mumbai CFS Terminal',
-				location: "Nhava Sheva, Mumbai, Maharashtra",
-			},
-		},
-		containerNo: 'TGHU234567',
-		size: '40',
-		date: '2024-02-15',
-		status: 'Accepted',
+		documents: ['dummy.pdf'],
+		remarks: "Urgent Processing",
+		reason: "",
+		collection: 'requests',
+		serviceType: 'Job Order Update',
 	},
 ];

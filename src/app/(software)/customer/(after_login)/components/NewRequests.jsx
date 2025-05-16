@@ -5,11 +5,17 @@ import { Dialog } from "@/components/ui/Dialog";
 import Input from "@/components/ui/Input";
 import Label from "@/components/ui/Label";
 import { orders } from "@/constants/orders";
+import TextArea from "@/components/ui/TextArea";
+import { cfsServices } from "@/constants/services";
+import { Select, SelectItem } from "@/components/ui/Select";
 
 export default function NewRequests() {
 	const [formData, setFormData] = useState({
 		orderId: '',
 		orderInfo: '',
+		remarks: '',
+		serviceType: '',
+		file: null,
 	});
 	const [showOrders, setShowOrders] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +42,15 @@ export default function NewRequests() {
 		e.preventDefault();
 		setIsOpen(false);
 		console.log('Form submitted:', formData);
+	};
+
+	const handleFileChange = (e) => {
+		if (e.target.files && e.target.files[0]) {
+			setFormData({
+				...formData,
+				file: e.target.files[0]
+			});
+		}
 	};
 
 	return (
@@ -80,6 +95,55 @@ export default function NewRequests() {
 								))}
 						</div>
 					)}
+				</div>
+
+				<div className="flex flex-col gap-2 relative">
+					<Label title="Remarks" />
+					<TextArea
+						name="remarks"
+						value={formData.remarks}
+						onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
+						placeholder="Enter Remarks (optional)"
+					/>
+				</div>
+
+				<div className="flex flex-col gap-2 relative">
+					<Label title="Remarks" />
+					<Select
+						placeholder="Service Type"
+						value={formData.serviceType}
+						onValueChange={(value) => {
+							setFormData({ ...formData, serviceType: value })
+						}}
+					>
+						{cfsServices.map((service, index) => (
+							<SelectItem key={index} value={service.id}>{service.title}</SelectItem>
+						))}
+					</Select>
+				</div>
+
+				<div className="flex flex-col gap-2">
+					<Label title="Upload Documents" />
+					<div className="flex items-center gap-2">
+						<label className="flex items-center cursor-pointer border rounded-xl px-4 py-2">
+							<svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+							</svg>
+							<span className="text-sm">Choose File</span>
+							<input
+								type="file"
+								className="hidden"
+								onChange={handleFileChange}
+								accept=".pdf,.jpg,.png"
+							/>
+						</label>
+						<span className="text-sm text-gray-500">
+							{formData.file ? formData.file.name : 'No file chosen'}
+						</span>
+					</div>
+					<p className="text-xs text-gray-500">
+						Supported file types: PDF, JPG, PNG (max size: 5MB)
+					</p>
 				</div>
 
 				<div className="mt-6">

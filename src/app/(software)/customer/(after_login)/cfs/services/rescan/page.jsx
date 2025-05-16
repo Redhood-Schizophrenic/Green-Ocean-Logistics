@@ -2,26 +2,15 @@
 
 import { useSidebar } from "@/contexts/SidebarProvider";
 import { useEffect } from "react";
-import Form from "./components/Form";
-import { useIsMobile } from "@/hooks/use-mobile";
-import MobileRequestList from "./components/MobileTable";
-import RequestList from "./components/Table";
 
 export default function RescanRequestPage() {
 	const { setTitle } = useSidebar();
 	useEffect(() => {
-		setTitle('Re-scanning Request')
+		setTitle('Re-scanning')
 	}, []);
 
 	return (
 		<section className="grid gap-8">
-			{
-				useIsMobile() ? (
-					<MobileRequestList />
-				) : (
-					<RequestList />
-				)
-			}
 		</section>
 	)
 }

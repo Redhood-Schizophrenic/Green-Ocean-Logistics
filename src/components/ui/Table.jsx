@@ -16,6 +16,9 @@ export function DataTable({
 	data,
 	columns,
 	loading,
+	displayButtons = true,
+	displayFilters = true,
+	additionalFilters = ''
 }) {
 	const [sorting, setSorting] = React.useState([]);
 	const [columnFilters, setColumnFilters] = React.useState([]);
@@ -78,8 +81,9 @@ export function DataTable({
 	return (
 		<div className="w-full">
 			<div className="flex flex-row-reverse items-center gap-4 py-4">
-				{selectedColumn && (
+				{(selectedColumn && displayFilters) && (
 					<>
+						{additionalFilters}
 						<Select
 							value={selectedColumn}
 							onValueChange={setSelectedColumn}
@@ -160,26 +164,30 @@ export function DataTable({
 				</table>
 			</div>
 
-			<div className="flex items-center justify-end space-x-2 py-4">
-				<div className="flex items-center gap-3">
-					<Button
-						title={'Previous'}
-						variant="outline"
-						className="rounded-lg w-[70px]"
-						textSize="text-xs"
-						onClick={() => table.previousPage()}
-						disabled={!table.getCanPreviousPage()}
-					/>
-					<Button
-						title={'Next'}
-						variant="outline"
-						className="rounded-lg w-[70px]"
-						textSize="text-xs"
-						onClick={() => table.nextPage()}
-						disabled={!table.getCanNextPage()}
-					/>
-				</div>
-			</div>
+			{
+				displayButtons && (
+					<div className="flex items-center justify-end space-x-2 py-4">
+						<div className="flex items-center gap-3">
+							<Button
+								title={'Previous'}
+								variant="outline"
+								className="rounded-lg w-[70px]"
+								textSize="text-xs"
+								onClick={() => table.previousPage()}
+								disabled={!table.getCanPreviousPage()}
+							/>
+							<Button
+								title={'Next'}
+								variant="outline"
+								className="rounded-lg w-[70px]"
+								textSize="text-xs"
+								onClick={() => table.nextPage()}
+								disabled={!table.getCanNextPage()}
+							/>
+						</div>
+					</div>
+				)
+			}
 		</div>
 	);
 }

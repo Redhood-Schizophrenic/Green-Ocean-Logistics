@@ -1,4 +1,4 @@
-import { ArrowDown, Bell, Boxes, CreditCard, FastForward, FileSearch2, FileText, LayoutDashboard, LayoutGrid, MapPinned, Package, Receipt, ReceiptText, Scale, Scan, Truck, UploadIcon, User } from "lucide-react";
+import { ArrowDown, Bell, Boxes, CreditCard, FastForward, FileSearch2, FileText, LayoutDashboard, LayoutGrid, MailQuestion, MapPinned, Package, Receipt, ReceiptText, Scale, Scan, Truck, UploadIcon, User } from "lucide-react";
 
 export const navLinks = [
 	{
@@ -19,19 +19,20 @@ export const navLinks = [
 		icon: Truck,
 		access: 'Customer',
 		subItems: [
+			{ label: "Requests", href: "/customer/cfs/requests", icon: MailQuestion, access: 'Customer', },
 			{ label: "Services", href: "/customer/cfs/services", access: 'Customer', icon: FileSearch2 },
 			{ label: "Track & Trace", href: "/customer/cfs/track-trace", access: 'Customer', icon: MapPinned },
 			{ label: "Tariff Upload", href: "/customer/cfs/tariff-upload", access: 'Customer', icon: UploadIcon },
-			{ label: "EIR / COP Request", href: '/customer/cfs/services/eir-cop', access: 'Customer', icon: FileText, },
-			{ label: "Priority Movements Request", href: '/customer/cfs/services/priority', access: 'Customer', icon: FastForward, },
-			{ label: "Weighment Slip Request", href: '/customer/cfs/services/weighment-slip', access: 'Customer', icon: Scale, },
-			{ label: "Special Equipment Request", href: '/customer/cfs/services/special-equipment', access: 'Customer', icon: LayoutGrid, },
+			{ label: "EIR / COP", href: '/customer/cfs/services/eir-cop', access: 'Customer', icon: FileText, },
+			{ label: "Priority Movements", href: '/customer/cfs/services/priority', access: 'Customer', icon: FastForward, },
+			{ label: "Weighment Slip", href: '/customer/cfs/services/weighment-slip', access: 'Customer', icon: Scale, },
+			{ label: "Special Equipment", href: '/customer/cfs/services/special-equipment', access: 'Customer', icon: LayoutGrid, },
 			{ label: "Container Grounding", href: '/customer/cfs/services/container-grounding', access: 'Customer', icon: ArrowDown, },
-			{ label: "Container Staging Request", href: '/customer/cfs/services/container-staging', access: 'Customer', icon: Boxes, },
-			{ label: "Re-Scanning Request", href: '/customer/cfs/services/rescan', access: 'Customer', icon: Scan, },
+			{ label: "Container Staging", href: '/customer/cfs/services/container-staging', access: 'Customer', icon: Boxes, },
+			{ label: "Re-Scanning", href: '/customer/cfs/services/rescan', access: 'Customer', icon: Scan, },
 			{ label: "Cheque Acceptance", href: '/customer/cfs/services/cheque', access: 'Customer', icon: CreditCard, },
-			{ label: "Tax Invoice Request", href: '/customer/cfs/services/tax-invoice', access: 'Customer', icon: Receipt, },
-			{ label: "Job Order Update Request", href: '/customer/cfs/services/job-order', access: 'Customer', icon: FileText, },
+			{ label: "Tax Invoice", href: '/customer/cfs/services/tax-invoice', access: 'Customer', icon: Receipt, },
+			{ label: "Job Order Update", href: '/customer/cfs/services/job-order', access: 'Customer', icon: FileText, },
 		]
 	},
 	{ label: "Notifications & Updates", href: "", access: 'Customer', icon: Bell },
@@ -52,6 +53,7 @@ export const navLinks = [
 		icon: Truck,
 		access: 'Client',
 		subItems: [
+			{ label: "Requests", href: "/client/cfs/requests", icon: MailQuestion, access: 'Client', },
 			{ label: "Services", href: "/client/cfs/services", access: 'Client', icon: FileSearch2 },
 			{ label: "EIR / COP Request", href: '/client/cfs/services/eir-cop', access: 'Client', icon: FileText, },
 			{ label: "Priority Movements Request", href: '/client/cfs/services/priority', access: 'Client', icon: FastForward, },

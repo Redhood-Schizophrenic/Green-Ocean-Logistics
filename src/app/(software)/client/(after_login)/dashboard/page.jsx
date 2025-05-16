@@ -9,7 +9,7 @@ export default function CustomerDashboardPage() {
 	}, []);
 
 	return (
-		<div></div>
+		<section className="grid gap-8"></section>
 	)
 }
 
