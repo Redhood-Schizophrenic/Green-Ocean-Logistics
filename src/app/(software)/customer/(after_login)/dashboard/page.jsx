@@ -8,6 +8,8 @@ import { FileText, Plus, Truck } from "lucide-react";
 import { DataTable } from "@/components/ui/Table";
 import { dashboardCols } from "./components/columns";
 import Notifications from "./components/Notifications";
+import { useIsMobile } from "@/hooks/use-mobile";
+import MobileTable from "./components/MobileTable";
 
 export default function CustomerDashboardPage() {
 	const { setTitle } = useSidebar();
@@ -22,23 +24,29 @@ export default function CustomerDashboardPage() {
 				<Button
 					icon={<Plus className="text-[var(--background)] cursor-pointer" />}
 					title={'Create New Order'}
-					className="rounded-md"
+					className="rounded-md md:w-full w-[300px]"
 				/>
 				<Button
 					icon={<FileText className="text-[var(--background)] cursor-pointer" />}
 					title={'View Tariff'}
-					className="rounded-md"
+					className="rounded-md md:w-full w-[300px]"
 				/>
 				<Button
 					icon={<Truck className="text-[var(--background)] cursor-pointer" />}
 					title={'Track Order'}
-					className="rounded-md"
+					className="rounded-md md:w-full w-[300px]"
 				/>
 			</div>
 
 			<div className="border-2 p-6 rounded-xl">
 				<h1 className="text-xl font-semibold">Recent Orders</h1>
-				<DataTable data={orders.slice(0, 5)} columns={dashboardCols} displayButtons={false} displayFilters={false} />
+				{
+					useIsMobile() ? (
+						<MobileTable />
+					) : (
+						<DataTable data={orders.slice(0, 5)} columns={dashboardCols} displayButtons={false} displayFilters={false} />
+					)
+				}
 			</div>
 			<Notifications />
 		</section>

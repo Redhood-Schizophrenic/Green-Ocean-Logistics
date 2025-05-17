@@ -1,6 +1,6 @@
-export default function Label({ title, ariaLabel = '', }) {
+export default function Label({ title, ariaLabel = '', className = '' }) {
 	return (
-		<label className="font-semibold" aria-label={ariaLabel}>{title}</label>
+		<label className={`font-semibold ${className}`} aria-label={ariaLabel}>{title}</label>
 	)
 }
 
